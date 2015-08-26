@@ -1,0 +1,202 @@
+/**
+ * =====================================
+ * @@.reserve ( value ; noQuote )
+ *
+ * PURPOSE:
+ * 		Helper function for the main @() function.
+ *		There is no need to call this function directly!
+ * 		Detects whether the value is within the list of
+ * 		SQL Reserved Words or contains an illegal SQL char.
+ *
+ * RETURNS:
+ * 		(string) A SQL quoted version of the supplied value
+ *
+ * PARAMETERS:
+ * 		value = supplied from calling function
+ * 		noQuote = optional boolean toggle to enforce no quoting
+ *
+ * EXAMPLES:
+ * 		@@.reserve ( "join"; 0)  // = "JOIN"
+ * 		@@.reserve ( "join"; 1)  // = JOIN
+ * 		@@.reserve ( "final price"; 0)  // = "final price"
+ * 		@@.reserve ( "description"; 0)  // = description
+ *
+ * DEPENDENCIES:
+ * 		none
+ *
+ * NOTE:
+ * 		For better performance, we process values by a combination
+ *		of their first letter and a 4-way split of the second letter.
+ *		These are combined so that, for example, SQL keywords beginning with
+ *		"A" are assigned ~switch of 0-3, those starting with "B" are 4-7, etc.
+ *		This keeps the PatternCount expression lean, and greatly speeds execution.
+ *
+ * HISTORY:
+ * 		Released on 2013-03-15 by Brian Schick (creator)
+ *
+ * REFERENCES:
+ * 		none
+ * =====================================
+ */
+
+Let ( [
+	~val       = Lower ( Trim ( value ) ); // cleaned version of the inbound value
+	~valLeft   = LeftWords ( ~val ; 1 );
+	~isIllegal = Length ( Filter ( ~val ; " .|-*/<>,=~!^()'\"") )
+				 or not Length ( Filter( Left ( ~val ; 1 ) ; "abcdefghijklmnopqrstuvwxyz" ) );
+
+	~l         = Code ( Left ( ~valLeft ; 1 ) ) - 97;
+	~m         = Code ( Middle ( ~valLeft ; 2 ; 1 ) );
+	~mval      = Case ( ~m < 102 ; 0 ; ~m < 109 ; 1 ; ~m < 115 ; 2 ; 3 ); // break on second letter at F,M,S
+	~switch    = ~l * 4 + ~mval;
+	~p         = "|" & ~valLeft & "|";
+
+	~isReserved = Choose( ~switch ;
+			// A
+			PatternCount ( "|absolute|action|add|" ; ~p );
+			PatternCount ( "|all|allocate|alter|" ; ~p );
+			PatternCount ( "|and|any|are|as|asc|assertion|" ; ~p );
+			PatternCount ( "|at|authorization|avg|" ; ~p );
+			// B
+			PatternCount ( "|begin|between|" ; ~p );
+			PatternCount ( "|binary|bit|bit_length|blob|" ; ~p );
+			PatternCount ( "|boolean|both|" ; ~p );
+			PatternCount ( "|by|" ; ~p );
+			// C
+			PatternCount ( "|cascade|cascaded|case|cast|catalog|" ; ~p );
+			PatternCount ( "|chapter|char|character|character_length|char_length|check|chr|close|" ; ~p );
+			PatternCount ( "|coalesce|collate|collation|column|commit|connect|connection|constraint|constraints|continue|convert|corresponding|count|create|cross|" ; ~p );
+			PatternCount ( "|curdate|current|current_date|current_time|current_timestamp|current_user|cursor|curtime|curtimestamp|" ; ~p );
+			// D
+			PatternCount ( "|date|dateval|day|dayname|dayofweek|deallocate|dec|decimal|declare|default|deferrable|deferred|delete|desc|describe|descriptor|" ; ~p );
+			PatternCount ( "|diagnostics|disconnect|distinct|" ; ~p );
+			PatternCount ( "|domain|double|drop|" ; ~p );
+			0;
+			// E
+			0;
+			PatternCount ( "|else|" ; ~p );
+			PatternCount ( "|end|end_exec|escape|" ; ~p );
+			PatternCount ( "|every|except|exception|exec|execute|exists|external|extract|" ; ~p );
+			// F
+			PatternCount ( "|false|fetch|" ; ~p );
+			PatternCount ( "|first|float|" ; ~p );
+			PatternCount ( "|for|foreign|found|from|" ; ~p );
+			PatternCount ( "|full|" ; ~p );
+			// G
+			PatternCount ( "|get|" ; ~p );
+			PatternCount ( "|global|" ; ~p );
+			PatternCount ( "|go|goto|grant|group|" ; ~p );
+			0;
+			// H
+			PatternCount ( "|having|" ; ~p );
+			0;
+			PatternCount ( "|hour|" ; ~p );
+			0;
+			// I
+			PatternCount ( "|identity|" ; ~p );
+			0
+			PatternCount ( "|immediate|in|index|indicator|initially|inner|input|insensitive|insert|int|integer|intersect|interval|into|is|isolation|" ; ~p );
+			0;
+			// J
+			0;
+			0;
+			PatternCount ( "|join|" ; ~p );
+			0;
+			// K
+			PatternCount ( "|key|" ; ~p );
+			0;
+			0;
+			0;
+			// L
+			PatternCount ( "|language|last|leading|left|length|level|" ; ~p );
+			PatternCount ( "|like|" ; ~p );
+			PatternCount ( "|local|longvarbinary|lower|" ; ~p );
+			PatternCount ( "|ltrim|" ; ~p );
+			// M
+			PatternCount ( "|match|max|" ; ~p );
+			PatternCount ( "|min|minute|" ; ~p );
+			PatternCount ( "|module|month|monthname|" ; ~p );
+			0;
+			// N
+			PatternCount ( "|names|national|natural|nchar|next|" ; ~p );
+			PatternCount ( "|no|not|" ; ~p );
+			0;
+			PatternCount ( "|null|nullif|numeric|numval|" ; ~p );
+			// O
+			PatternCount ( "|octet_length|" ; ~p );
+			PatternCount ( "|of|" ; ~p );
+			PatternCount ( "|on|only|open|option|or|order|" ; ~p );
+			PatternCount ( "|outer|output|overlaps|" ; ~p );
+			// P
+			PatternCount ( "|pad|part|partial|" ; ~p );
+			0;
+			PatternCount ( "|position|precision|prepare|preserve|primary|prior|privileges|procedure|" ; ~p );
+			PatternCount ( "|public|" ; ~p );
+			// Q
+			0;
+			0;
+			0;
+			0;
+			// R
+			PatternCount ( "|read|real|references|relative|restrict|revoke|" ; ~p );
+			PatternCount ( "|right|" ; ~p );
+			PatternCount ( "|rollback|round|rowid|rows|" ; ~p );
+			PatternCount ( "|rtrim|" ; ~p );
+			// S
+			PatternCount ( "|schema|scroll|second|section|select|session|session_user|set|" ; ~p );
+			PatternCount ( "|size|" ; ~p );
+			PatternCount ( "|smallint|some|space|sql|sqlcode|sqlerror|sqlstate|" ; ~p );
+			PatternCount ( "|standards|strval|substring|sum|supported|system_user|" ; ~p );
+			// T
+			PatternCount ( "|table|temporary|" ; ~p );
+			PatternCount ( "|then|time|timestamp|timestampval|timeval|timezone_hour|timezone_minute|" ; ~p );
+			PatternCount ( "|to|today|trailing|transaction|translate|translation|trim|true|" ; ~p );
+			0;
+			// U
+			0;
+			0;
+			PatternCount ( "|union|unique|unknown|update|upper|usage|user|username|using|" ; ~p );
+			0;
+			// V
+			PatternCount ( "|value|values|varbinary|varchar|varying|" ; ~p );
+			PatternCount ( "|view|" ; ~p );
+			0;
+			0;
+			// W
+			0;
+			PatternCount ( "|when|whenever|where|with|" ; ~p );
+			PatternCount ( "|work|" ; ~p );
+			PatternCount ( "|write|" ; ~p );
+			// X
+			0;
+			0;
+			0;
+			0;
+			// Y
+			PatternCount ( "|year|" ; ~p );
+			0;
+			0;
+			0;
+			// Z
+			0;
+			0;
+			PatternCount ( "|zone|" ; ~p );
+			0
+		)
+];
+	Case (
+		// unquoted reserved values are returned in upper case
+		noQuote and ~isReserved ;
+			Upper ( ~val ) ;
+
+		// otherwise, unquoted values are returned without modification (important for searching)
+		noQuote ;
+			value ;
+		// reserved & illegal values are double quoted so they'll work with queries
+		~isReserved or ~isIllegal ;
+			"\"" & ~val & "\"" ;
+
+		// default: otherwise, we return the cleaned, lowercase value
+		~val
+	)
+)
