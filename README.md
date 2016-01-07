@@ -1,25 +1,28 @@
-FMModuleMaster
+fm-library
 ==========
 
 Created by Charles Ross, chivalry@mac.com
 
-A single file that integrates many of the modules available at modularfilemaker.com.
+This project started out as my custom function library, but the rise of modular FileMaker projects prompted me to create this and integrate the custom functions as a module.
 
-The full access name is "Developer" and the password for the account is "developer". The
-file has been configured to use these credentials automatically.
+The purpose of this project is to provide a single file with all of the modules that I consider to be either necessary to a well-built FileMaker system or at least likely to be useful across many systems. Unlike many starter systems available, this doesn't try to offer the basic tables needed for the data model (although there is a table template and one data table that's almost always required, `Files`). Rather, it tries to offer tools in a modular fashion, be they custom functions, scripts, or developer utilities.
+
+Each module will generally be self-contained in case others wish to move them to their own system rather than use this as a starter file. However, given the ease with which custom functions can be brought over by a simple import, and given my own great appreciate for custom functions, a reliance on the Custom Function module will almost certainly be required for any other module.
 
 Requirements
 ------------
 
 - FileMaker Pro 14 Advanced or greater during integration. FileMaker Pro 14 or greater
 for daily use.
+- TODO: Offer module-specific instructions.
 
 Integration Instructions
 ------------------------
 
-Integration requires access to FileMaker Pro Advanced 12 or greater. These instructions
-assume you are familiar with using FileMaker Pro Advanced to alter your solution's
-tables, layouts, etc.
+- TODO
+
+Version History
+---------------
 
 License
 -------
