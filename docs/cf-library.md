@@ -1,11 +1,16 @@
-fm-cf-library
-=============
+cf-library
+==========
 
 Created by Charles Ross, chivalry@mac.com
 
 A FileMaker module that provides a standard custom function libary. With over 400
 available functions, this library includes a wide range of readily available tools
 for the FileMaker developer.
+
+This module has been rolled into the fm-library project, and so the latest version is
+always to be found on [GitHub](https://github.com/chivalry/fm-library), where you'll also
+find the [HTML](https://github.com/chivalry/fm-library/blob/master/docs/cf-library.md)
+version of this document.
 
 While I wrote many of these myself, there are quite a few that are from other sources.
 I've tried to acknowledge the original author when I could as well as provide a URL to
