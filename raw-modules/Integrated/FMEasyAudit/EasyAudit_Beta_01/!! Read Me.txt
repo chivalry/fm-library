@@ -1,0 +1,50 @@
+*** EasyAudit Demo Database ***
+
+EasyAudit is distributed via a single FileMaker Pro database, which you will find in this zip file.
+
+
+
+*** FileMaker Accounts ***
+
+There are three accounts setup in the EasyAudit database:
+
+Account Name: Admin
+Password: fmezaudit
+Privilege Set: Full Access
+
+Account Name: User1
+Password: fmezuser1
+Privilege Set: Data Entry Only
+
+Account Name: User2
+Password: fmezuser2
+Privilege Set: Data Entry Only
+
+
+
+*** Using the EasyAudit Demo Database ***
+
+EasyAudit must be hosted on a server running FileMaker Server 13 or later.
+
+To access the database, you can use any of the FileMaker 13 platform clients, including FileMaker Pro, FileMaker Pro Advanced, FileMaker Go, and FileMaker WebDirect.
+
+
+*** Wiring up EasyAudit to Your Own Solution ***
+
+Interested in using EasyAudit in your own FileMaker-based solution? You’ll find detailed "Setup and Configuration" instructions on the EasyAudit Web site: http://fmeasyaudit.com/
+
+
+*** Technical Support ***
+
+Feel free to email me (Tim Dietrich - timdietrich@me.com) with any questions that you have about EasyAudit. I will do my best to get back to you in a timely manner.
+
+If you are interested in having me consult with you, or provide support that is beyond the basics, let me know. You can find rates and availability on my company's Web site: http://simpledbs.com
+
+
+Thanks for your interest in EasyAudit!
+
+Tim Dietrich
+Web: http://timdietrich.me
+Twitter: @tdietrich
+
+

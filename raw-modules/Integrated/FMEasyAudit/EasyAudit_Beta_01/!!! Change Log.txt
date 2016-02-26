@@ -1,0 +1,10 @@
+EasyAudit Demo - Change Log
+
+Beta 1 (Posted 09-18-2014)
+• Initial beta released.
+• Includes examples of all core auditing functions.
+• No support for "rollbacks" yet.
+
+###
+
+

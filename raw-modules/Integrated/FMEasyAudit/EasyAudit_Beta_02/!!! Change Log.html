@@ -1,0 +1,36 @@
+<html>
+
+	<head>
+		<title>FMEasyAudit Change Log</title>
+	</head>
+
+	<body style="background: #fff; font-family: 'Helvetica Neue', Helvetica, sans-serif;">
+		<div style="width: 800px; margin:0 auto;">
+		
+			<h1 style="margin-top: 36px;">FMEasyAudit Change Log</h1>
+			
+			<p style="margin-top: 36px; border-top: 1px solid #ccc; padding-top: 36px;">
+			<span style="font-weight: bold;">Beta 2 (11-15-2014)</span><br />
+			&bull; The single "EasyAudit" script has been split into several smaller, modularized scripts.<br />
+			&bull; User-definable "EA_" fields are supported. You'll see settings for these in the "EasyAudit - Settings" script.<br />
+			&bull; The demo database now includes an "Audit Log" tab, as an example of how you can view related entries in the log, including those of related records. I have added an "EA_UUID_List" field to the Surveys table, and a new relationship between Surveys and the EasyAudit table (as table occurrence "Survey_Log") to illustrate this functionality.<br />
+			&bull; The "Open Log" function will now display all log entries if no script param is passed, or a list of log entries based on a list of records (if a list of EA_UUID values passed to it). The demo database's "Open Log" button is an example of how you can use this to open the log viewer and see logs for the parent and child records.<br />
+			&bull; Added a new "$$ea_baseline_deletes" setting. If enabled, EasyAudit will take a baseline of a record (or records) prior to logging the deletion. This is enabled by default.<br />
+			&bull; Bug Fix: The "Tail" button (on the EasyAudit layout) is now wired up properly to the "EasyAudit - Tail Log" script.<br />
+			&bull; Bug Fix: Added support for non-SQL-compliant base table names and table occurrence names.<br />
+			&bull; Renamed a few settings. $$omit_tables is now $$ea_omit_tables. $$timeout_seconds is now $$ea_timeout_seconds.<br />
+			&bull; Log "Entry Types" now more accurately reflect new and changed values. If the value being logged is in a field that previous had no log entry, then it will appear in the logs as "New Value." Otherwise, it shows as a "Changed Value."<br />
+			</p>				
+			
+			<p style="margin-top: 36px; border-top: 1px solid #ccc; padding-top: 36px;">
+			<span style="font-weight: bold;">Beta 1 (09-18-2014)</span><br />
+			&bull; Initial beta released.<br />
+			&bull; Includes examples of all core auditing functions.<br />
+			&bull; No support for "rollbacks" yet.<br />
+			</p>					
+
+		</div>
+
+	</body>
+</html>
+
