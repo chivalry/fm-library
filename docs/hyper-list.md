@@ -1,14 +1,14 @@
 hyper-list
 ===========
 
-Created by Todd Geist, todd@geistinteractive.com
+Created by Todd Geist, todd@geistinteractive.com 
 Forked by Charles Ross, chivalry@mac.com
 
-This **hyper-list** module is based on Todd Geist's original **HyperList** module, but
+This **hyper-list** module is based on Todd Geist's original
+**[HyperList](http://www.modularfilemaker.org/module/hyperlist/)** module, but
 conforms to my own general standards as outlined in the `conventions` documentation.
 
-According to the [web page](http://www.modularfilemaker.org/module/hyperlist/) for the
-original version from which this is forked:
+According to the web page for the original version from which this is forked:
 
 > HyperList is a very fast, completely abstracted module for capturing a found set of
 Primary Keys to a variable, for use in FileMaker
@@ -22,6 +22,17 @@ capturing 80,000 primary keys in about 10 seconds. As of version 2.0 it can gath
 > - Uses normal FileMaker sorting order
 > - Can handle 10s of thousands of records
 > - It works on FileMaker Go and FileMaker Pro
+
+This fork makes the following changes while retaining the functionality of the original
+version:
+
+- Moves the storage and retrieval of the default column separator setting into a custom
+  function
+- Expects custom column separators to be passed as an optional parameter to the script
+- Simplifies the loop that concatenates the final result
+- Places the duplicated custom separator code within a loop
+- Takes advantage of the script parameter functions found in the `cf-library` module
+- Formats the various calculations for better readability and `fm-library` conventions
 
 Acknowledgements
 ----------------
@@ -38,26 +49,58 @@ On the [HyperList web page](http://www.modularfilemaker.org/module/hyperlist/), 
 mentions that Jason Young of [SeedCode](http://seedcode.com) built the multiple field
 support for version 2.0.
 
-Finally, Todd also gives credit to Koe and Corn Walker of The Proof Group for help with testing and plotting the results.
+Finally, Todd also gives credit to Koe and Corn Walker of The Proof Group for help with
+testing and plotting the results.
 
 Requirements
 ------------
 
-None
+- `cf-library` module for the use of script parameter functions and the
+  `hypr.ColumnSeparator` setting function.
 
 Integration Instructions
 ------------------------
 
-Copy the `hyper-list` folder into the target file.
+- Install the functions found in the `cf-library` module.
+- Copy the `hyper-list` folder into the target file.
 
-Conventions
------------
+Usage
+-----
+
+Once you have a found set of records for which you want to capture a list of field data
+using **hyper-list**, call the `hyper-list: Found Set Values ( FieldList { ; ColSepList }
+)` script, passing it a list of one to five fields to return the values of. Use the
+`scpm.Param` custom function to properly format the parameters sent to the script. The
+`FieldList` parameter expects a list of field names, so be sure to use `GetFieldName`
+when passing these to the script.
+
+    scpm.Param (
+      "FieldList" ;
+      List ( GetFieldName ( Table::uuid ) ; GetFieldName ( Table::field ) )
+    )
+
+The script's second parameter, `ColSepList`, is optional, and if omitted multiple columns
+will be separated by the string returned by the `hypr.ColumnSeparator` custom function.
+The number of column separators passed to the script should be , at most, one less than
+the number of fields.
+
+    scpm.Param (
+      "FieldList" ;
+      List ( GetFieldName ( Table::uuid ) ; GetFieldName ( Table::field1 ) )
+    ) &
+    scpm.Param ( "ColSepList" ; "><" )
 
 Version History
 ---------------
 
 - 2.0.1 - 140129 - Todd's release before fork.
 - 3.0.0 - 160228 - Chuck's first version after fork.
+
+To Do
+-----
+
+- See if the duplicate code that exists inside and outside the data collection loop can
+  be consolidated.
 
 License
 -------
