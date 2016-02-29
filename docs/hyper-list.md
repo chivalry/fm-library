@@ -1,7 +1,7 @@
 hyper-list
 ===========
 
-Created by Todd Geist, todd@geistinteractive.com 
+Created by Todd Geist, todd@geistinteractive.com  
 Forked by Charles Ross, chivalry@mac.com
 
 This **hyper-list** module is based on Todd Geist's original
