@@ -1,4 +1,4 @@
-tab-restore
+panel-restore
 ===========
 
 Created by Bob Ellis
