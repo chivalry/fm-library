@@ -1,0 +1,7 @@
+// err. InsufficientPrivileges
+// Purpose:		Returns the error number for the named error
+// Version:		1.0 - Charles Ross - 17-03-10
+// Notes:			Meant to be compared with Get ( LastError )
+// Example:		err. InsufficientPrivileges = 9
+
+9

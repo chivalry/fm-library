@@ -1,0 +1,22 @@
+// dev.FieldNames ( _table )
+// Purpose:		Return a list of the non-divider fields in the named table.
+// Parameters:		_table:	The name of the table to get the fields from.
+// Requirements: 	dev.Nil
+// Version:		1.0 - Charles Ross - 17-07-07
+// Notes:			Divider fields are those that start with at least four underscores.
+// Example:		sample = result
+
+Let (
+  [
+    _sql = List (
+      "SELECT FieldName" ;
+      "FROM   FileMaker_Fields" ;
+      "WHERE  TableName = ?" ;
+      "AND    FieldName NOT LIKE ?"
+    ) ;
+
+    _result = ExecuteSQL ( _sql ; dev.Nil ; dev.Nil ; _table ; "\_\_\_\_%" )
+  ] ;
+
+  _result
+)

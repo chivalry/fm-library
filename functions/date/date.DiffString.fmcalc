@@ -1,0 +1,36 @@
+// date.DiffString ( _date_1; _date_2 )
+// Purpose:		Return the difference between two dates in english.
+// Parameters:		_date_1:	The earlier date
+//				_date_2:	The latter 	date
+// Version:		1.0 - Winfried Huslik - 2006
+//				1.1 - Charles Ross 15-11-29 - break into four separate functions
+// Example:		date.Difference ( Date ( 1; 1; 2015 ); Date ( 6; 10; 2006 ) ) = "8 years, 6 months, and 21 days"
+
+Let (
+  [
+    _years		= Abs ( date.DiffYears ( _date_1 ; _date_2 ) ) ;
+    _months	= Abs ( date.DiffMonths ( _date_1 ; _date_2 ) ) ;
+    _days		= Abs ( date.DiffDays ( _date_1 ; _date_2 ) ) ;
+
+    _years_label = Case (
+      _years = 1	; "year"
+			; "years"
+    ) ;
+
+    _months_label = Case (
+      _months = 1	; "month"
+				; "months"
+    ) ;
+
+    _days_label = Case (
+      _days = 1	; "day"
+			; "days"
+    ) ;
+
+    _result =	_years & _years_label &
+			_months & _months_label &
+			_days & _days_label
+  ] ;
+
+  _result
+)

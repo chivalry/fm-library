@@ -1,0 +1,9 @@
+// date.FirstDayOfWeek ( _date; _week_start )
+// Purpose:		Return the date of the week's start that contains the given date and starts on the
+//				given week start (Sun=0, Mon=1, …)
+// Parameters:		_date:			The date for which to find the beginning of the week.
+//				_week_start:		The weekday to use as the first day of the week.
+// Version:		1.0 - Matt Wills, Virtual Vermont - 15-04-14
+// Example:		date.FirstDayOfWeek ( Date ( 3; 17; 2015 ) ; date.Monday ) = Date ( 3; 16; 2015 )
+
+_date - ( DayOfWeek ( _date ) - ( _week_start + 1 ) )

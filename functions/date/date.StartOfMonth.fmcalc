@@ -1,0 +1,7 @@
+// date.StartOfMonth ( _date )
+// Purpose:		Returns the date of the first day of the month in which _date falls in.
+// Parameters:		_date:	The date to get the first of the month for
+// Version:		1.0 - Charles Ross - 17-06-24
+// Example:		date.StartOfMonth ( Date ( 6 ; 16 ; 1971 ) ) = Date ( 6 ; 1 ; 1971 )
+
+Date ( Month ( _date ) ; 1 ; Year ( _date ) )

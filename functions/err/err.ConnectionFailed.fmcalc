@@ -1,0 +1,7 @@
+// err.ConnectionFailed
+// Purpose:		Returns the error number for the named error
+// Version:		1.0 written 15-03-11 by Charles Ross
+// Notes:			Meant to be compared with Get ( LastError )
+// Example:		err.ConnectionFailed = 1631
+
+1631

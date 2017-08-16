@@ -1,0 +1,6 @@
+// data.Digits
+// Purpose:		A convenience function for filtering digits in strings.
+// Version:		1.0 written 15-03-11 written by Charles Ross
+// Example:		data.Digits = "0123456789"
+
+"0123456789"

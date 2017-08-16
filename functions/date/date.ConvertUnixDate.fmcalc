@@ -1,0 +1,23 @@
+// date.ConvertUnixDate ( _unix_date )
+// Purpose:		Given a date in standard Unix format (YYYY-MM-DD), return a FileMaker date.
+// Parameters:		_unix_date:	A date in standard Unix format.
+// Requirements: 	list.CreateList
+// Version:		1.0 written 15-08-24 by Charles Ross
+// Example:		date.ConvertUnixDate ( "2015-08-24" ) = Date ( 8 ; 24 ; 2015 )
+
+Let (
+  [
+    _date_list	= list.CreateList ( _unix_date ; "-" ) ;
+    _year		= GetValue ( _date_list ; 1 ) ;
+    _month		= GetValue ( _date_list ; 2 ) ;
+    _day		= GetValue ( _date_list ; 3 ) ;
+    _date		= Date ( _month ; _day ; _year ) ;
+
+    _result = Case (
+      IsEmpty ( _unix_date ) or ( _date = "?" ) ;	dev.Nil ;
+									_date
+    )
+  ] ;
+
+  _result
+)

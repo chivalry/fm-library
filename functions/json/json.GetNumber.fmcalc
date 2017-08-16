@@ -1,0 +1,27 @@
+// json.GetNumber ( _json ; _key_index_or_path )
+// Purpose:		Parses a value from JSON data, and casts it to a number
+// Parameters:		_json:			the json to parse
+//				_key_index_or_path:	which value to parse out
+// Requirements: 	requirements
+// Version:		1.0 - Jeremy Bante - 17-04-06
+//				1.1 - Jeremy Bante - 17-04-08 - Refactoring
+//				1.2 - Daniel Smith - 17-04-25 - Add value to result if it's not a number
+//				1.3 - Jeremy Bante - 17-04-27 - Omitting input from error result
+//				1.4 - Jeremy Bante - 17-04-30 - Revising wording of NaN error result and
+//				  re-including parsed value, based on discussion with Dan Smith.
+// Example:		sample = result
+
+Let (
+  [
+    _value		= JSONGetElement ( _json ; _key_index_or_path ) ;
+    _error		= ( Left ( _value ; 1 ) = "?" ) ;
+    _number	= GetAsNumber ( _value ) ;
+    _nan		= IsEmpty ( _number ) and not IsEmpty ( _value )
+  ] ;
+
+  Case (
+    _error	; _value ;
+    _nan	; "? Value is not a number¶  " & _value
+		; _number
+  )
+)

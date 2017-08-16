@@ -1,0 +1,21 @@
+// json.GetDate
+// Purpose:		Parses a value from JSON data, and casts it to a FileMaker date
+// Parameters:		_param:	description
+// Requirements: 	timestamp.FromISO8601
+// Version:		1.0 - Jeremy Bante - 17-04-06
+//				1.1 - Jeremy Bante - 17-04-08 - Refactoring
+// Notes:			Assumes that the date is encoded as a JSONString formatted according
+//				to ISO 8601.
+// Example:		sample = result
+
+Let (
+  [
+    _value = JSONGetElement ( _json ; _key_index_or_path ) ;
+    _error = Left ( _value ; 1 ) = "?"
+  ] ;
+
+  Case (
+    _error	; _value
+		; GetAsDate ( timestamp.FromISO8601 ( _value ) )
+  )
+)

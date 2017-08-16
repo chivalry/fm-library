@@ -1,0 +1,7 @@
+// err.InvalidPrivilegeSet
+// Purpose:		Custom error number for missing privilege set.
+// Version:		1.0 written 17-06-20 by Charles Ross
+// Notes:			Custom error numbers begin at 10000
+// Example:		err.InvalidPrivilegeSet = 10001
+
+10001

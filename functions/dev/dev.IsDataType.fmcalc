@@ -1,0 +1,24 @@
+// dev.IsDataType ( _value ; _type )
+// Purpose:		Returns True (1) if the passed value is of the passed data type.
+// Parameters:		_value:	The value to test
+//				_type:	the type to test against, should be "timestamp", "time", or "date"
+// Version:		1.0 - Charles Ross - 17-02-24
+// Notes:			Primarily used within the letn.Set function
+// Todo:			Figure out if this function should be a utility function for the letn group.
+// Example:		dev.IsDataType ( Get ( CurrentDate ) ; "date" ) = 1
+
+Let (
+  [
+    _value_plus_one = GetAsText ( _value + 1 ) ;
+
+    _value = Case (
+      _type = "timestamp"	; GetAsTimestamp ( _value ) ;
+      _type = "time"		; GetAsTime ( _value ) ;
+      _type = "date"		; GetAsDate ( _value )
+    ) ;
+
+    _result = ( GetAsText ( _value + 1 ) = _value_plus_one )
+  ] ;
+
+  _result
+)

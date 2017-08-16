@@ -1,0 +1,14 @@
+// data.Colors
+// Purpose:		Return a dictionary of name/value paris of colors with their RGB values.
+// Requirements:	let.Set
+// Version:		1.0 - Charles Ross - 17-03-08
+// Notes:			At this point, only used by the text.Color funciton.
+
+let.Set ( "blue"	; RGB ( 102	; 51		; 204		) ) &
+let.Set ( "red"	; RGB ( 255	; 0		; 0		) ) &
+let.Set ( "gray"	; RGB ( 150	; 150		; 150		) ) &
+let.Set ( "grey"	; RGB ( 150	; 150		; 150		) ) &
+let.Set ( "black"	; RGB ( 0		; 0		; 0		) ) &
+let.Set ( "white"	; RGB ( 255	; 255		; 255		) ) &
+let.Set ( "gold"	; RGB ( 255	; 0		; 153		) ) &
+let.Set ( "green"	; RGB ( 0		; 16		; 139		) )

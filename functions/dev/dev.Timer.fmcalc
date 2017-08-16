@@ -1,0 +1,56 @@
+// dev.Timer ( _name; _action )
+// Purpose:		Manipulates the named timer with the given action, storing timers in a global variable.
+// Parameters:		_name:	The name of the timer to perform the action on.
+//				_action:	Which action to perform.
+// Requirements: 	let.Get
+//				let.Set
+//				devp.Nil
+// Version:		1.0 - Arnold Kegebein - 10-06-01
+//				1.1 - Charles Ross - 17-02-10 - replaced kege functions with letn.
+// Notes:			If the timer exiss already, returns the difference between the timer's start and the
+//				current time.
+//				http://www.kegebein.net/blog/2010/06/unlimited-timer/
+// Example:		// With the side effect that the timer is stored for future use.
+//				dev.Timer ( "timer"; "start" ) & dev.Timer ( "timer"; "stop" ) = "0:00:00"
+
+Let(
+  [
+    _now = timestamp.LocalMilliseconds ;
+    _timer = let.Get ( $$_TIMR_TIMER ; _name ) ;
+
+    _start = let.Get ( _timer ; "start" ) ;
+    _stop = let.Get ( _timer ; "stop" ) ;
+    _stop = Case(
+      IsEmpty( _stop );		_now;
+      					_stop
+    );
+
+    _diff = Case(
+      IsEmpty( _start );		dev.Nil;
+      					_stop - _start
+    );
+
+    _timer = Case(
+      _action = "start";
+      let.Set ( "start" ; _now ) ;
+
+      _action = "stop" and IsEmpty( _start );
+      let.Set ( "start" ; _stop ) & let.Set ( "stop" ; _stop ) ;
+
+      _action = "stop";
+      let.Set ( "start" ; _start ) & let.Set ( "stop" ; _stop )
+    );
+
+    $$_TIMR_TIMER = Case(
+      _action = "start" or _action = "stop";
+      let.Set ( _name ; _timer ) ;
+
+      _action = "delete";
+      let.Set ( _name ; dev.Nil ) ;
+
+      $$_TIMR_TIMER
+    )
+  ];
+
+  _diff
+)

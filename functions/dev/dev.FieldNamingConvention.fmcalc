@@ -1,0 +1,23 @@
+// dev.FieldNamingConvention
+// Purpose:		Return a text string describing the naming convention for this sytem.
+// Version:		1.0 - Charles Ross - 17-07-07
+// Notes:			Currently supports two naming conventions. Any different naming conventions will need to have this updated.
+//				Assumes every table will have at least a created by field. This includes one-record tables.
+// Todo:			To dos
+// Example:		sample = result
+
+Let (
+  [
+    _table =  list.First ( dev.TableNames ) ; // It shouldn't matter which table we use. All should have the default fields.
+
+    _fields = dev.FieldNames ( _table ) ;
+
+    _convention = Case (
+      list.IsMember ( "zzzCreatedBy"	; _fields ) ; "alpha_naming" ;
+      list.IsMember ( "created_by"	; _fields ) ; "manual_naming"
+									; dev.Nil
+    )
+  ] ;
+
+  _convention
+)

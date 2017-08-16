@@ -1,0 +1,7 @@
+// key.DeleteCode
+// Purpose:		Return the code for the delete key
+// Version:		1.0 - Charles Ross - 17-04-03
+// Example:		// When $_char holds the delete character…
+//				Code ( $_char ) = key.DeleteCode
+
+8

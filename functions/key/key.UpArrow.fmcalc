@@ -1,0 +1,7 @@
+// key.UpArrow
+// Purpose:		Return the code for the up arrow key
+// Version:		1.0 - Charles Ross - 17-04-21
+// Example:		// When $_char holds the up arrow character…
+//				$_char = key.UpArrow
+
+Char ( key.UpArrowCode )

@@ -1,0 +1,7 @@
+// err.NoError
+// Purpose:		Returns the error number for the named error
+// Version:		1.0 written 15-06-21 by Charles Ross
+// Notes:			Meant to be compared with Get ( LastError )
+// Example:		err.NoError = 0
+
+0

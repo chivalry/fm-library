@@ -1,0 +1,13 @@
+// dev.TableNames
+// Purpose:		Return a list of table (occurrence) names
+// Requirements: 	dev.Nil
+// Version:		1.0 - Charles Ross - 17-07-07
+// Example:		sample = result
+
+ExecuteSQL (
+  List (
+    "SELECT TableName" ;
+    "FROM FileMaker_Tables"
+  ) ;
+  dev.Nil ; dev.Nil
+)

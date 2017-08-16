@@ -1,0 +1,30 @@
+// dev.ModifiedInfo
+// Purpose:		Returns a string that reports in human-readable format the details of record modification
+// Parameters:		_table:	The name of the table to report on
+// Requirements: 	timestamp.ClockTime
+//				Standard naming conventions for relevant fields
+// Version:		1.0 - Jim Feuerstein
+//				1.1 - Charles Ross - 17-07-07 - Auto-detect field naming convention
+// Example:		sample = result
+
+Let (
+  [
+    _convention = dev.FieldNamingConvention ;
+
+    _modified_by_field_name	= Case ( _convention = "alpha_naming" ; "zzzModBy" ; "modified_by" ) ;
+    _modified_date_field_name	= Case ( _convention = "alpha_naming" ; "zzzModDate" ; "date_modified" ) ;
+    _modified_time_field_name	= Case ( _convention = "alpha_naming" ; "zzzModTime" ; "time_modified" ) ;
+
+    _table = _table & "::" ;
+
+    _result = Case (
+      IsEmpty ( _convention ) ; "Update `dev.FieldNamingConvention` and `dev.CreatedInfo` with field naming convention logic." ;
+
+      "Last modified by " & GetField ( _table & _modified_by_field_name ) &
+        " on " & GetField ( _table & _modified_date_field_name ) &
+        " at " & timestamp.ClockTime ( GetField ( _table & timestamp.ClockTime ( _modified_time_field_name ) ) )
+    )
+  ] ;
+
+  _result
+)

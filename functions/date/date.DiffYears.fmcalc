@@ -1,0 +1,22 @@
+// date.DiffYears ( _date_1; _date_2 )
+// Purpose:		Return the difference between two dates in integer years
+// Parameters:		_date_1:	The earlier date
+//				_date_2:	The latter 	date
+// Version:		1.0 - Winfried Huslik - 2006
+//				1.1 - Charles Ross 15-11-29 - break into four separate functions
+// Notes:			Numbers are returned with the appropriate sign when _date_2 < _date_1
+// Example:		date.DiffYears ( Date ( 1; 1; 2015 ); Date ( 6; 10; 2006 ) ) = -8
+
+Let(
+  [
+    _sign = Sign ( _date_2 - _date_1 );
+
+    _d_1 = Min ( _date_1 ; _date_2 ) ;
+    _d_2 = Max ( _date_1 ; _date_2 ) ;
+
+    _years = Year ( _d_2 ) - Year ( _d_1 )
+      - ( ( Month ( _d_2 ) - ( Day ( _d_2 ) < Day ( _d_1 ) ) ) < Month ( _d_1 ) )
+  ];
+
+  _years * _sign
+)

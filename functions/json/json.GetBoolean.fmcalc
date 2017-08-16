@@ -1,0 +1,22 @@
+// json.GetBoolean ( _json ; _key_index_or_path )
+// Purpose:		Parses a value from JSON data and casts it to a boolean
+// Parameters:		_json:			the json to parse
+//				_key_index_or_path:	which value to parse out
+// Requirements: 	requirements
+// Version:		1.0 - Jeremy Bante - 17-05-11
+// Example:		sample = result
+
+Let (
+  [
+    _value		= JSONGetElement ( _json ; _key_index_or_path ) ;
+    _error		= ( Left ( _value ; 1 ) = "?" ) ;
+    _not_bool	= ( _value ≠ False ) and ( _value ≠ True )
+
+  ] ;
+
+  Case (
+    _error		; _value ;
+    _not_bool	; "? Value is not a boolean¶  " & _value
+			; _value
+  )
+)

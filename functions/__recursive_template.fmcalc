@@ -1,0 +1,55 @@
+// Template
+// Purpose:		description
+// Parameters:		_param:	description
+// Requirements: 	requirements
+// Version:		1.0 - Charles Ross - 17-03-08
+// Notes:			Notes
+// Todo:			To dos
+// Example:		sample = result
+
+Case (
+  // ========================================
+  // Step 0: Setup
+  IsEmpty ( $_custom_function_name_step ) ;
+  Let (
+    [
+      $_custom_function_name_debug = False ;
+
+      _ = ""
+    ] ;
+
+    __recursive_template
+  ) ;
+
+  // ========================================
+  // Step 1: Recursion
+  $_custom_function_name_step = 1 ;
+  Let (
+    [
+      _ = "recurisve steps here" ;
+
+      _ = ""
+    ] ;
+    __recursive_template
+  ) ;
+
+  // ========================================
+  // Step 2: Cleanup
+  $_custom_function_name_step = 2 ;
+  Let (
+    [
+      _result = "assign result and clear local variables if not debugging" ;
+
+      _ = Case (
+        not $_custom_function_name_debug ;
+        dev.ClearVars ( List ( "var" ; "var" ) )
+      ) ;
+
+      // Step is always cleared regardless of debug mode.
+      $_custom_function_name_step = dev.Nil ;
+
+      _ = ""
+    ] ;
+    _result
+  )
+)

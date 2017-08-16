@@ -1,0 +1,27 @@
+// json.Assign ( _json )
+// Purpose:		Assigns JSON keys to local variables with given values.
+// Parameters:		_json:	The JSON to parse
+// Version:		1.0 - Charles Ross - 17-05-11
+// Example:		Let (
+//				  _json = json.assign ( JSONSetElement ( "" ; "foo" ; "bar" ; JSONString ) ) ;
+//				  $foo = "bar"
+//				)
+
+Case (
+  ValueCount ( JSONListKeys ( _json ; dev.Nil )  ) = 0 ;
+  dev.Nil ;
+
+  Let (
+    [
+      _keys		= JSONListKeys ( _json ; dev.Nil ) ;
+      _key		= list.First ( _keys ) ;
+      _value		= JSONGetElement ( _json ; _key ) ;
+      _json		= JSONDeleteElement ( _json ; _key ) ;
+
+      _calc = "Let ( $" & _key & " = " & Quote ( _value ) & " ; dev.Nil )" ;
+      _ = Evaluate ( _calc )
+    ] ;
+
+    json.Assign ( _json )
+  )
+)

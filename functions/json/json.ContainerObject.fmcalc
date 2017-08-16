@@ -1,0 +1,11 @@
+// json.ContainerObject ( _container )
+// Purpose:		Encodes container data as a JSONObject
+// Parameters:		_container:	The container data to encode.
+// Version:		1.0 - Jeremy Bante - 17-04-16
+//				1.1 - Jeremy Bante - 17-04-27 - Using Base64EncodeRFC to improve speed, implementing a recommendation by Dan Smith
+// Example:		sample = result
+
+JSONSetElement ( dev.Nil ;
+  [ "fileName"	; GetContainerAttribute ( _container ; "filename" ) ; JSONString ] ;
+  [ "base64"	; Base64EncodeRFC ( 4648 ; _container ) ; JSONString ]
+)

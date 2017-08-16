@@ -1,0 +1,21 @@
+// json.GetTime ( _json ; _key_index_or_path )
+// Purpose:		Parses a value from JSON data, and casts it to a FileMaker time
+// Parameters:		_json:			the json to parse
+//				_key_index_or_path:	which value to parse out
+// Requirements: 	timestamp.FromISO8601
+// Version:		1.0 - Jeremy Bante - 17-04-16
+// Notes:			ssumes that the time is encoded as a JSONString formatted according
+//				to ISO 8601
+// Example:		sample = result
+
+Let (
+  [
+    _value = JSONGetElement ( _json ; _key_index_or_path ) ;
+    _error = Left ( _value ; 1 ) = "?"
+  ] ;
+
+  Case (
+    _error	; _value
+		; GetAsTime ( timestamp.FromISO8601 ( _value ) )
+  )
+)

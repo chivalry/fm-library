@@ -1,0 +1,8 @@
+// date.YYYYMMDD ( _date _
+// Purpose:		Converts a date value into the YYYYMMDD format.
+// Parameters:		_date:	The date to format.
+// Requirements: 	date.Format
+// Version:		1.0 - Charles Ross - 17-03-08
+// Example:		date.YYYYMMDD ( Date ( 3 ; 8 ; 2017 ) ) = "20170308"
+
+timestamp.Format ( GetAsTimestamp ( _date ) ; "%Y%m%d" )

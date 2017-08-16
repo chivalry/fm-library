@@ -1,0 +1,26 @@
+// dev.ClearVars ( _vars )
+// Purpose:		Takes a list of variables and sets all of them to an empty string.
+// Parameters:		_vars:	The list of variables to clear. Should include single or double dollar signs.
+// Requirements: 	list.First
+//				list.Rest
+//				dev.SetVarByName
+//				devp.Nil
+// Version:		1.0 - Charles Ross - 17-02-23
+// Todo:			Perhaps allow calls to exclude dollar sign and assume when there is none that a
+//				local variable is meant.
+// Example:		sample = result
+
+Case (
+  ValueCount ( _vars ) = 0 ; dev.Nil ;
+
+  Let (
+    [
+      _var	= list.First ( _vars ) ;
+      _vars	= list.Rest ( _vars ) ;
+
+      _ = dev.SetVarByName ( _var ; dev.Nil )
+    ] ;
+
+    dev.ClearVars ( _vars )
+  )
+)

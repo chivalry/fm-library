@@ -1,0 +1,30 @@
+// dev.CreatedInfo
+// Purpose:		Returns a string that reports in human-readable format the details of record creation
+// Parameters:		_table:	The name of the table to report on
+// Requirements: 	timestamp.ClockTime
+//				Standard naming conventions for relevant fields
+// Version:		1.0 - Jim Feuerstein
+//				1.1 - Charles Ross - 17-07-07 - Auto-detect field naming convention
+// Example:		sample = result
+
+Let (
+  [
+    _convention = dev.FieldNamingConvention ;
+
+    _created_by_field_name	= Case ( _convention = "alpha_naming" ; "zzzCreateBy" ; "created_by" ) ;
+    _created_date_field_name	= Case ( _convention = "alpha_naming" ; "zzzCreateDate" ; "date_created" ) ;
+    _created_time_field_name	= Case ( _convention = "alpha_naming" ; "zzzCreateTime" ; "time_created" ) ;
+
+    _table = _table & "::" ;
+
+    _result = Case (
+      IsEmpty ( _convention ) ; "Update `dev.FieldNamingConvention` and `dev.CreatedInfo` with field naming convention logic." ;
+
+      "Created by " & GetField ( _table & _created_by_field_name ) &
+        " on " & GetField ( _table & _created_date_field_name ) &
+        " at " & timestamp.ClockTime ( GetField ( _table & timestamp.ClockTime ( _created_time_field_name ) ) )
+    )
+  ] ;
+
+  _result
+)

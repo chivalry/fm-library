@@ -1,0 +1,7 @@
+// key.Tab
+// Purpose:		Return the code for the tab key
+// Version:		1.0 - Charles Ross - 17-04-21
+// Example:		// When $_char holds the tab character…
+//				$_char = key.Tab
+
+Char ( key.TabCode )

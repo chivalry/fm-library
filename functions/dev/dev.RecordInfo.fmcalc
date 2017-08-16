@@ -1,0 +1,23 @@
+// dev.RecordInfo
+// Purpose:		Returns a string that reports in human-readable format the details of record ID
+// Parameters:		_table:	The name of the table to report on
+// Requirements: 	timestamp.ClockTime
+//				Standard naming conventions for relevant fields
+// Version:		1.0 - Jim Feuerstein
+// Example:		sample = result
+
+Let (
+  [
+    _convention = dev.FieldNamingConvention ;
+
+    _primary_key_field_name = Case ( _convention = "alpha_naming" ; "__id" ; "id" ) ;
+
+    _result = Case (
+      IsEmpty ( _convention ) ; "Update `dev.FieldNamingConvention` and `dev.RecordInfo` functions for this system's conventions" ;
+
+      "Record ID: " & GetField ( _table & "::" & _primary_key_field_name )
+    )
+  ] ;
+
+  _result
+)

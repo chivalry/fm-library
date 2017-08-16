@@ -1,0 +1,7 @@
+// key.Escape
+// Purpose:		Return the code for the escape character
+// Version:		1.0 - Charles Ross - 17-04-21
+// Example:		// When $_char holds the escape character…
+//				$_char = key.Escape
+
+Char ( key.EscapeCode )

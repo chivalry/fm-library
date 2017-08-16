@@ -1,0 +1,22 @@
+// dev.Loop ( _count ; _statements ; _result_name )
+// Purpose:		Executes _statements _count times and returns the variable named in _result_name.
+// Parameters:		_count:	Repetition count, 0 < _count < 10,000
+//				_statements:	One or more statements to be repeated
+//				_result_name:	The variable name to return as the final result
+// Version:		1.0 - Charles Ross - 17-02-23
+// Notes:			Creates a string with _count evaluates of _statements and then evaluates that (perhaps very long) string.
+// Todo:			To dos
+// Example:		Let ( [ $c=0; $ret=0 ]; dev.Loop ( 10 ; "$c=$c+1; $ret=$ret+$c" ; "$ret" )  ) = 55
+
+Case (
+  _count < 0 ; "?" ;
+  _count = 0 ; Evaluate ( _value_name ) ;
+
+  Let (
+    [
+      _ = Evaluate ( "Let ( [ " & _statements & " ] ; \"\" )" )
+    ] ;
+
+    dev.Loop ( _count - 1 ; _statements ; _value_name )
+  )
+)

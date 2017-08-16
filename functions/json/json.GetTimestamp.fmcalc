@@ -1,0 +1,21 @@
+// json.JSONGetTimestamp ( _json ; _key_index_or_path )
+// Purpose:		Parses a value from JSON data and casts it to a FileMaker timestamp.
+// Parameters:		_json:			the json to parse
+//				_key_index_or_path:	which value to parse out
+// Requirements: 	timestamp.FromISO88601
+// Version:		1.0 - Jeremy Bante - 17-04-16
+// Notes:			Assumes the timestamp is encoded as a JSONString formatted in ISO 8601.
+// Todo:			To dos
+// Example:		sample = result
+
+Let (
+  [
+    _value = JSONGetElement ( _json ; _key_index_or_path ) ;
+    _error = Left ( _value ; 1 ) = "?"
+  ] ;
+
+  Case (
+    _error 	; _value
+		; timestamp.FromISO8601 ( _value )
+  )
+)

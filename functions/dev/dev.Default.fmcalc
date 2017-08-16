@@ -1,0 +1,12 @@
+// dev.Default
+// Purpose:		If the value is set, return it, else return a default value.
+// Parameters:		_value:	The value to test against and return if set.
+//				_default:	What to return if value is empty.
+// Version:		1.0 - Charles Ross - 17-04-03
+// Example:		dev.Default ( dev.Nil ; "default" ) = "default"
+//				  and dev.Default ( "value" ; "default" ) = "value"
+
+Case (
+  dev.IsSet ( _value )	; _value
+				; _default
+)

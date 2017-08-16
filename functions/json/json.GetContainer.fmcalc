@@ -1,0 +1,25 @@
+// json.GetContainer ( _json ; _key_index_or_path )
+// Purpose:		Parses a value from JSON data, and casts it as FileMaker container data
+// Parameters:		_json:			the json to parse
+//				_key_index_or_path:	which value to parse out
+// Version:		1.0 - Jeremy Bante - 17-04-16
+// Notes:			Assumes that the _key_index_or_path refers to a JSONObject encoded according to
+//				the format of the `json.ContainerObject` function.
+// Example:		sample = result
+
+Let (
+  [
+    _value = JSONGetElement ( _json ; _key_index_or_path ) ;
+    _error = Left ( _value ; 1 ) = "?" ;
+
+    _parsed = Base64Decode (
+      JSONGetElement ( _value ; "base64" ) ;
+      JSONGetElement ( _value ; "fileName" )
+    )
+  ] ;
+
+  Case (
+    _error	; _value
+		; _parsed
+  )
+)

@@ -1,0 +1,46 @@
+// app.Version ( _format )
+// Purpose:		Returns the application version in either simple or compare format.
+// Parameters:		_format:	Either "simple" or "compare", defaults to simple
+// Version:		1.0 - Charles Ross - 17-03-13
+//				1.1 - Charles Ross - 17-07-03 - Automated compare version from simple version
+// Notes:			The second section of the compare format is the numeric release version,
+//				with 0 for alpha, 1 for beta and 2 for production.
+// Example:		app.Version ( "" ) = "1.0a1"
+
+Let (
+  [
+    _version = "1.0a1" ;
+
+    _major = text.PadZeros ( Truncate ( GetAsNumber ( _version ) ; 0 ) ; 3 ) ;
+
+    _release = Case (
+      PatternCount ( _version ; "a" ) ; 0 ;
+      PatternCount ( _version ; "b" ) ; 1 ;
+      PatternCount ( _version ; "v" ) ; 2
+    ) ;
+
+    _version = Substitute (
+      _version ;
+      [ "a" ; "." ] ;
+      [ "b" ; "." ] ;
+      [ "v" ; "." ]
+    ) ;
+    _list = list.CreateList ( _version ; "." ) ;
+
+    _minor = text.PadZeros ( GetValue ( _list ; 2 ) ; 3 ) ;
+    _incr  = text.PadZeros ( GetValue ( _list ; 3 ) ; 3 ) ;
+
+    _compare = list.ReplaceSeparator ( List ( _major ; _release ; _minor ; _incr ) ; "." ) ;
+
+    _result = Case (
+      "compare" ≠ "compare" ;
+      _version ;
+
+      // major.release.minor.increment
+      _compare
+    )
+
+  ] ;
+
+  _result
+)

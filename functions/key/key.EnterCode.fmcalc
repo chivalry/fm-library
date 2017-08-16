@@ -1,0 +1,7 @@
+// key.EnterCode
+// Purpose:		Return the code for the enter key (line feed)
+// Version:		1.0 - Charles Ross - 17-04-03
+// Example:		// When $_char holds the line feed character…
+//				Code ( $_char ) = key.EnterCode
+
+10

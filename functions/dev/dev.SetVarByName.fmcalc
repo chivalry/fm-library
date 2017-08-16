@@ -1,0 +1,19 @@
+// dev.SetVarByName ( _variable_name ; _value )
+// Purpose:		Given the name of a global or local variable, sets it to the passed value.
+// Parameters:		_var_name:	The name of the variable to set
+//				_value:		The value to give to the variable
+// Requirements:	let.Enclose
+// Version:		1.0 - Charles Ross - 15-06-22
+//				1.1 - Charles Ross - 17-02-25 - use letn.EncloseInLet
+// Example:		dev.SetVarByName ( "$_var" ; "foo" ) and ( $_var = "foo" )
+
+Let (
+  [
+    _value	= Quote ( _value ) ;
+    _code	= let._Enclose ( _var_name & " = " & _value & " ;" ) ;
+
+    _result = Evaluate ( _code )
+  ];
+
+  _result
+)

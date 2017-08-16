@@ -1,0 +1,6 @@
+// data.Alphabet
+// Purpose:		Returns the alphabet in lower case.
+// Version:		1.0 written 15-05-22 written by Charles Ross
+// Example:		data.Alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+"abcdefghijklmnopqrstuvwxyz"

@@ -1,0 +1,12 @@
+// dev.DataTypeMustBeText ( _value )
+// Purpose:		Returns true if the data type cannot be other than text.
+// Parameters:		_value:	The value to test
+// Requirements:	devp.Nil
+// Version:		1.0 - Charles Ross - 17-02-24
+// Notes:			Primarily used for the letn.Set function.
+// Todo:			Figure out if this function should be a utility function for the letn group.
+// Example:		sample = result
+
+( _value = dev.Nil )
+  or ( _value = "?" )
+  or ( GetAsNumber ( _value ) = "?" )

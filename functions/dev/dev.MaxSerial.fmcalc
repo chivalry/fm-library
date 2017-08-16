@@ -1,0 +1,27 @@
+// dev.MaxSerial ( _field )
+// Purpose:		Returns the highest numeric primary key for the given field and table.
+// Parameters:		_field:	The field to return the maximum serial number for
+// Version:		1.0 - Charles Ross - 17-06-17
+// Example:		sample = result
+
+Let (
+  [
+    _sql = List (
+      "SELECT MAX(_primary_key)" ;
+      "FROM _table"
+    ) ;
+
+    _primary_key	= sql.QuotedFieldName ( _field ) ;
+    _table			= sql.QuotedTableName ( _field ) ;
+
+    _sql = Substitute (
+      _sql ;
+      [ "_primary_key"	; _primary_key	] ;
+      [ "_table"		; _table		]
+    ) ;
+
+    _result = ExecuteSQL ( _sql ; "" ; "" )
+  ] ;
+
+  _result
+)

@@ -1,0 +1,9 @@
+// dev.IsSet ( _value )
+// Purpose:		A convenience function for easier readability when needing to check that a value is
+//				not empty.
+// Parameters:		_value:	The value to check.
+// Version:		1.0 - The Scarpetta Group - 15-04-14
+// Example:		// Assuming that $_value has non-empty contents:
+//				dev.IsSet ( $_value ) = 1
+
+not IsEmpty ( _value )

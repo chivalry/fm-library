@@ -1,0 +1,7 @@
+// err.NameNotValid
+// Purpose:		Returns the error number for the named error
+// Version:		1.0 written 15-11-25 by Charles Ross
+// Notes:			Meant to be compared with Get ( LastError )
+// Example:		err.NameNotValid = 11
+
+11

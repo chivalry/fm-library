@@ -1,0 +1,8 @@
+// dev.Nil
+// Purpose:		Provides a human-readible storage for an empty string.
+// Version:		1.0 written 15-03-11 by Charles Ross
+// Note:			This is meant to be used to make it clear when something is being set to an empty
+//				string in order to blank it out, especially variables, but is also useful for comparisons.
+// Example		dev.Nil = ""
+
+""

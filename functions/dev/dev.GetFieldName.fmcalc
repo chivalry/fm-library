@@ -1,0 +1,18 @@
+// dev.GetFieldName ( _field )
+// Purpose:		Returns only the field name, i.e., without the table occurrence name
+// Parameters:		_field: The field to return the name of.
+// Requirements:	list.CreateList
+// Version:		1.0 - Kevin Frank - 11-04-18
+// Notes:			GetFieldName() returns the relationship plus the field name.
+//				http://filemakerhacks.com/2011/04/18/avoiding_brittleness/
+// Example:		// When TableOccurrence::field_name exists
+//				dev.GetFieldName ( TableOccurrence::field_name ) = "field_name"
+
+Let (
+  [
+    _to_and_field	= GetFieldName ( _field );
+    _list			= list.CreateList ( _to_and_field ; "::" )
+  ];
+
+  GetValue ( _list; 2 )
+)

@@ -1,0 +1,8 @@
+// dev.NullValue
+// Purpose:		Provides a unique string to use when needing to pass empty parameters to a script but
+//				the actual parameter can't be empty because the script template specifies that it's
+//				required.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		devp.NullParam = "~~~~NULL~~~~"
+
+"~~~~NULL~~~~"

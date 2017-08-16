@@ -1,0 +1,7 @@
+// key.Return
+// Purpose:		Return the code for the return key (carriage return)
+// Version:		1.0 - Charles Ross - 17-04-21
+// Example:		// When $_char holds the carriage return character…
+//				$_char = key.Return
+
+Char ( key.ReturnCode )
