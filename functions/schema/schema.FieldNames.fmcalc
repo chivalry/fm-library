@@ -1,0 +1,15 @@
+// schema.FieldNames ( _table )
+// Purpose:		Return all of the fields in the table, as opposed to `FieldNames` which only works with
+//				fields ona particular layout.
+// Parameters:		_table:	The name of the table (occurrence) to return the fields of
+// Version:		1.0 - Charles Ross - 17-07-24
+// Example:		sample = result
+
+ExecuteSQL (
+  List (
+    "SELECT FieldName" ;
+    "FROM FileMaker_Fields" ;
+    "WHERE TableName = ?"
+  ) ;
+ dev.Nil ; dev.Nil ; _table
+)

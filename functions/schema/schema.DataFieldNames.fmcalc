@@ -1,0 +1,83 @@
+// schema.DataFieldNames ( _table )
+// Purpose:		Returns the names of the fields in the given table that store data, i.e., excluding
+//				calculations, summaries, globals, etc.
+// Parameters:		_table:	The name of the table to return the data fields of
+// Requirements:	list.CustomList
+//				schema.FieldNames
+//				schema.FieldStorageType
+//				dev.ClearVars
+// Version:		1.0 - Charles Ross - 17-07-24
+//				1.1 - Charles Ross - 17-08-01 - Updated to remove use of list.CustomList, recursive instead.
+// Notes:			Notes
+// Todo:			To dos
+// Example:		sample = result
+
+Case (
+  // ========================================
+  // Step 0: Setup
+  IsEmpty ( $_schema_datafieldnames_step ) ;
+  Let (
+    [
+      $_schema_datafieldnames_debug = False ;
+      $_schema_datafieldnames_step = 1 ;
+
+      $_schema_datafieldnames_fieldnames = schema.FieldNames ( _table )
+    ] ;
+
+    schema.DataFieldNames ( _table )
+  ) ;
+
+  // ========================================
+  // Step 1: Recursion
+  $_schema_datafieldnames_step = 1 ;
+  Let (
+    [
+      _valid_storage_types = List (
+        "Standard" ;
+        "External(Open)" ;
+        "External(Secure"
+      ) ;
+
+      _field_name = list.Pop ( "$_schema_datafieldnames_fieldnames" ) ;
+      _qualified_field_name = _table & "::" & _field_name ;
+      _storage_type = schema.FieldStorageType ( _qualified_field_name ) ;
+
+      $_schema_datafieldnames_result = Case (
+        dev.IsSet ( _field_name ) and list.IsMember ( _storage_type ; _valid_storage_types ) ;
+        List ( $_schema_datafieldnames_result ; _field_name ) ;
+        $_schema_datafieldnames_result
+      ) ;
+
+      $_schema_datafieldnames_step = Case (
+        IsEmpty ( _field_name )	; 2
+						; 1
+      )
+    ] ;
+
+    schema.DataFieldNames ( _table )
+  ) ;
+
+  // ========================================
+  // Step 2: Cleanup
+  $_schema_datafieldnames_step = 2 ;
+  Let (
+    [
+      _result = $_schema_datafieldnames_result ;
+
+      _ = Case (
+        not $_schema_datafieldnames_debug ;
+        dev.ClearVars ( List (
+          "$_schema_datafieldnames_debug" ;
+          "$_schema_datafieldnames_fieldnames" ;
+          "$_schema_datafieldnames_result"
+        ) )
+      ) ;
+
+      // Step is always cleared regardless of debug mode.
+      $_schema_datafieldnames_step = dev.Nil ;
+
+      _ = ""
+    ] ;
+    _result
+  )
+)

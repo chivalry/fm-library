@@ -1,0 +1,7 @@
+// key.VerticalTab
+// Purpose:		Return the code for the vertical tab character
+// Version:		1.0 - Charles Ross - 17-07-28
+// Example:		// When $_char holds the vertical tab character…
+//				$_char = key.VerticalTab
+
+Char ( key.VerticalTabCode )

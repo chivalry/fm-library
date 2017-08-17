@@ -1,0 +1,13 @@
+// range.Integers ( _start ; _end )
+// Purpose:		Returns a list of numbers from _start to _end, inclusive
+// Parameters:		_start:	The start of the range of integers
+//				_end:	The end of the range
+// Version:		1.0 - Charles Ross - 17-07-23
+// Notes:			No correct is made if start exceeds end, empty string returned.
+// Example:		sample = result
+
+Case (
+  _start > _end	; dev.Nil ;
+  _start = _end	; _start
+			; List ( _start ; range.Integers ( _start + 1 ; _end ) )
+)

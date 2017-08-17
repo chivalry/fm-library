@@ -1,0 +1,10 @@
+// date.WeekdayCount ( _start ; _end ; _ignore )
+// Purpose:		description
+// Parameters:		_param:	description
+// Requirements: 	requirements
+// Version:		1.0 written 17-03-08 by Charles Ross
+// Notes:			Based on algorithm from jej@igeek.co.uk, 12-09-25
+// Todo:			To dos
+// Example:		sample = result
+
+ValueCount ( range.Weekdays ( _start ; _end ; _ignore ) )

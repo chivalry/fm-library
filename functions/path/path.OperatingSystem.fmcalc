@@ -1,4 +1,4 @@
-// path.OSPath ( _fm_path )
+// path.OperatingSystem ( _fm_path )
 // Purpose:		Converts a FileMaker style path into one native to the current OS.
 // Parameters:		_fm_path:	The native FileMaker path to convert.
 // Requirements: 	The BaseElements plugin
@@ -9,6 +9,7 @@
 //				sysk.PlatformIsMac
 //				sysk.PlatformIsWin
 // Version:		1.0 - Nicholas Orr - 11-06-03
+//				1.1 - Charles Ross - 17-08-08 - Replaced `Get ( SystemDrive )` with `dev.SystemDrive
 // Notes:			http://www.goya.com.au/blog/guide-filemaker-import-paths
 // Example:		sample = result
 
@@ -17,7 +18,7 @@ Let (
     _desktop			= text.TrimStart ( Get ( DesktopPath ) ; 1 ) ; 
     _users				= "/Users" ; 
     _username			= Left ( _desktop ; Position ( _desktop ; "/" ; 1 ; 1 ) - 1 ) ; 
-    _system_drive		= Get ( SystemDrive ) ; 
+    _system_drive		= dev.SystemDrive ; 
     _system_drive_len		= Length ( _system_drive ) ; 
     _volumes			= "/Volumes" ; 
 

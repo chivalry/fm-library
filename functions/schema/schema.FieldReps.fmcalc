@@ -1,0 +1,8 @@
+// schema.FieldReps ( _field )
+// Purpose:		Returns the number of repeitions the field is defined to have.
+// Parameters:		_field:	The field to get the repetitions of
+// Version:		1.0 - Will M. Baker - 11-10-29
+// Example:		// Assuming the field is defined to have 4 repetitions…
+//				schema.FieldReps ( Table::field ) = 4
+
+GetAsNumber ( FieldType ( Get ( FileName ) ; GetFieldName ( _field ) ) )

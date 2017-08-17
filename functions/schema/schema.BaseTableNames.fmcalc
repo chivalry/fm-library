@@ -1,0 +1,30 @@
+// schema.BaseTableNames
+// Purpose:		Returns the base table names, as opposed to `TableNames`, which returns TO names
+// Version:		1.0 - Charles Ross - 17-07-24
+//				1.1 - Charles Ross - 17-07-29 - Restrict to local base tables
+//				1.2 - Charles Ross - 17-08-09 - Added logic to correctly return results when file is served
+// Example:		sample = result
+
+Let (
+  [
+    _sql = "SELECT DISTINCT BaseTableName FROM FileMaker_Tables WHERE BaseFileName = ?" ;
+
+    // When the file is served, the `BaseFileName` field stores the actually filename followed by the host name
+    // in parentheses.
+    _host = Case (
+      Get ( MultiUserState ) = system.MultiUserStateClient ;
+      " (" & Get ( HostName ) & ")" ;
+      dev.Nil
+    ) ;
+
+    _criteria = Get ( FileName ) & _host ;
+
+    _result = ExecuteSQL (
+      _sql ;
+      dev.Nil ; dev.Nil ;
+      _criteria
+    )
+  ] ;
+
+  _result
+)

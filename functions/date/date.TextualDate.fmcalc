@@ -1,0 +1,8 @@
+// date.FullMonthName
+// Purpose:		Format a date in full text form (i.e., "January 1, 2017")
+// Parameters:		_date:	The date to format
+// Requirements: 	timestamp.Format
+// Version:		1.0 - Charles Ross - 17-03-08
+// Example:		date.FullMonthName ( Date ( 1 ; 1 ; 2017 ) ) = "January 1, 2017"
+
+timestamp.Format ( _date ; "%B%e, %Y" )

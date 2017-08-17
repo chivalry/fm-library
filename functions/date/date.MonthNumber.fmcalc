@@ -1,0 +1,12 @@
+// date.MonthNumber ( _month_name )
+// Purpose:		Return the month number given a month name.
+// Parameters:		_month_name:	The name of the month to get the number of
+// Version:		1.0 - David Head - 10-05-15
+// Example:		sample = result
+
+Position ( 
+  "xxJanFebMarAprMayJunJulAugSepOctNovDec" ; 
+  Left ( _month_name ; 3 ) ; 
+  1 ; 
+  1 
+) / 3

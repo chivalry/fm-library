@@ -1,0 +1,17 @@
+// timestamp.FromRFC2822 ( _rfc_2822 )
+// Purpose:		Parses an RFC2822 timestamp into a FileMaker timestamp
+// Parameters:		_rfc_2822: The RFC2822 formatted string
+// Version:		1.0 - Charles Ross - 17-07-09
+// Example:		sample = result
+
+Let (
+  [
+   _list = list.CreateList ( _rfc_2822 ; " " ) ;
+
+    _month = date.MonthNumber ( GetValue ( _list ; 3 ) ) ;
+    _day = GetAsNumber ( GetValue ( _list ; 2 ) ) ;
+    _year = GetValue ( _list ; 4 )
+  ] ;
+
+  Timestamp ( Date ( _day ; _month ; _year ) ; GetAsTime ( GetValue ( _list ; 5 ) ) )
+)

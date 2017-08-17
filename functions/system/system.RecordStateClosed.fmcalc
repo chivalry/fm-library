@@ -1,0 +1,6 @@
+// system.RecordStateClosed
+// Purpose:		Returns the value returned by `Get ( RecordOpenState )` when the record is closed.\
+// Version:		1.0 - Charles Ross - 17-07-23
+// Example:		sample = result
+
+0

@@ -1,0 +1,15 @@
+// schema.FieldStorageType ( _field )
+// Purpose:		Returns a text string describing the field's storage type ( "Standard", "External(Open)", etc.)
+// Parameters:		_field_name:	The name of the field to return the data type of (use `GetFieldName`)
+// Version:		1.0 - Charles Ross - 17-07-24
+// Example:		sample = result
+
+Let (
+  [
+    _field_type = FieldType ( dev.Nil ; _field_name ) ;
+    _list = list.CreateList ( _field_type ; " " ) ;
+    _storage_type = list.First ( _list )
+  ] ;
+
+  _storage_type
+)

@@ -1,0 +1,17 @@
+// dev.SystemDrive
+// Purpose:		FileMaker Server 16 returns an empty string for `Get ( SystemDrive )`. This function returns what
+//				that function used to return.
+// Version:		1.0 - Charles Ross - 17-08-10
+// Example:		// When run within FileMaker Pro…
+//				Get ( SystemDrive ) = dev.SystemDrive
+
+Let (
+  [
+    _doc = Get ( DocumentsPath ) ;
+    _comps = Substitute ( _doc ; "/" ; "¶" ) ;
+    _name = GetValue ( _comps ; 2 ) ;
+    _system_drive = "/" & _name & "/"
+  ] ;
+
+  _system_drive
+)

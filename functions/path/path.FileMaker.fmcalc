@@ -7,6 +7,7 @@
 //				sysk.PlatformIsMac
 //				sysk.PlatformIsWin
 // Version:		1.0 - Nicholas Orr - 11-06-03
+//				1.1 - Charles Ross - 17-08-08 - Replaced `Get ( SystemDrive )` with `dev.SystemDrive
 // Notes:			http://www.goya.com.au/blog/guide-filemaker-import-paths
 // Example:		sample = result
 
@@ -16,7 +17,7 @@ Let (
     _users_len		= Length ( _users ) ; 
     _username		= text.TrimStart ( _os_path ; _users_len + 1 ) ; 
     _username		= Left ( _username ; Position ( _username ; "/" ; 1 ; 1 ) - 1 ) ; 
-    _system_drive	= Get ( SystemDrive ) ; 
+    _system_drive	= dev.SystemDrive ;
     _system_drive	= Left ( _system_drive ; Length ( _system_drive ) - 1 ) ; 
     _volume		= "/Volumes" ; 
     _volume_len		= Length ( _volume ) ; 
@@ -37,7 +38,7 @@ Let (
 					_system_drive & _os_path
     ) ; 
 
-    _win_path = Case ( Left ( _os_path ; 2 ) ≠ "\\\\" ; "/" ) & Substitute ( _os_path ; "\\" ; "/" );
+    _win_path = _system_drive & Substitute ( _os_path ; "\\" ; "/" );
 
     _result = path.ProtocolPlatform & Case (
 	platform.IsMac ;	_mac_path ;

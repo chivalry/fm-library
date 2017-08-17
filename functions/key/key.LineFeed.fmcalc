@@ -1,0 +1,7 @@
+// key.LineFeed
+// Purpose:		Return the code for the linefeed
+// Version:		1.0 - Charles Ross - 17-04-21
+// Example:		// When $_char holds the linefeed character…
+//				$_char = key.LineFeed
+
+Char ( key.LinefeedCode )
