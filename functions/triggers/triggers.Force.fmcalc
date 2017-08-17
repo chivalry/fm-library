@@ -1,0 +1,16 @@
+// triggers.Force
+// Purpose:		Forces triggers to enable. Should always be accompanied by triggers.Restore
+// Version:		1.0 - Charles Ross - 17-04-27
+// Notes:			Execute this, with triggers.Retore, when a script step absolutely *must* have
+//				triggers turned on.
+// Example:		sample = result
+
+Let (
+  [
+    $$_TRIGGERS_SCRIPTS_STORE = $$_TRIGGERS_DISABLED_SCRIPTS ;
+    $$_TRIGGERS_DISABLED_SCRIPTS = dev.Nil ;
+    $$_TRIGGERS_DISABLED = dev.Nil
+  ] ;
+
+  ""
+)

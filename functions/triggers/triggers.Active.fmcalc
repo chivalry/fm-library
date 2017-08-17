@@ -1,0 +1,10 @@
+// triggers.Active
+// Purpose:		Checks a global variable to determine if script triggers should be allowed to run.
+// Requirements: 	$$_TRIGGERS_DISABLED
+// Version:		1.0 - Jeremy Bante - 13-04-08
+// Notes:			https://github.com/jbante/FileMaker-Techniques/blob/master/CustomFunctions/Triggers/TriggersAreActive.fmfn
+//				http://filemakerstandards.org/display/bp/Suppressible+Triggered+Scripts
+// Example:		// Assuming triggers have been disabled…
+//				not triggers.Active
+
+not $$_TRIGGERS_DISABLED

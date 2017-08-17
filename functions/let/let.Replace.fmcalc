@@ -1,0 +1,17 @@
+// let.Replace ( _params ; _name ; _value )
+// Purpose:		Replaces the existing value in name with the new one passed.
+// Parameters:		_params:	The let notation parameters to replace the name in
+//				_name:	The name to replace the value of
+//				_value:	The new value to store in the name
+// Requirements: 	let.Remove
+//				let.Set
+// Version:		1.0 written 17-02-24 by Charles Ross
+// Example:		Let (
+//				  [
+//				    _letn = let.Set ( "var_1" ; "val_1" ) & let.Set ( "var_2" ; "val_2" ) ;
+//				    _letn = let.Replace ( _letn ; "var_1" ; "new" )
+//				  ] ;
+//				  let.Get ( _letn ; "var_1" ) = "new"
+//				)
+
+let.Remove ( _params ; _name ) & let.Set ( _name ; _value )

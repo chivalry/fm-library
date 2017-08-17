@@ -1,0 +1,9 @@
+// path.POSIX
+// Purpose:		Returns the POSIX path given a path returned by FileMaker.
+// Parameters:		_path:	The FileMaker path returned by one of the `Get` functions.
+// Version:		1.0 - Charles Ross - 17-06-16
+// Notes:			Notes
+// Todo:			To dos
+// Example:		path.POSIX ( Get ( DesktopPath ) ) = "/Users/chuck/Desktop/"
+
+Substitute ( _path ; Get ( SystemDrive ) ; "/" )

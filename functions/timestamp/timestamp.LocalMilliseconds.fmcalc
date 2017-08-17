@@ -1,0 +1,6 @@
+// timestamp.LocalMilliseconds
+// Purpose:		Return the current timestamp accurate to milliseconds.
+// Requirements: 	timestamp.UTCDifference
+// Version:		1.0 - Charles Ross - 17-02-10
+
+GetAsTimestamp ( ( Get ( CurrentTimeUTCMilliseconds ) / 1000 ) + GetAsNumber ( timestamp.UTCDifference ) )

@@ -1,0 +1,17 @@
+// list.RemoveBlanks ( _list )
+// Purpose:		Returns the passed list with blank items removed.
+// Parameters:		_list:	The list to remove blanks from.
+// Requirements: 	list.First
+//				list.Rest
+// Version:		1.0 written 15-09-12 by Charles Ross
+// Example:		list.RemoveBlanks ( List ( 1 ; 2 & ¶ ; 3 ) ) = List ( 1 ; 2 ; 3 )
+
+Case (
+  ValueCount ( _list ) = 0 ;
+  dev.Nil ;
+
+  List (
+    list.First ( _list ) ;
+    list.RemoveBlanks ( list.Rest ( _list ) )
+  )
+)

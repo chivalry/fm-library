@@ -1,0 +1,7 @@
+// system.RecordStateEditedOpen
+// Purpose:		Returns the constant value indicating modified record is uncommitted
+// Version:		1.0 - Charles Ross - 17-03-20
+// Example:		// The current record is being edited and is uncommited…
+//				Get ( RecordOpenState ) = system.RecordStateEditedOpen
+
+2

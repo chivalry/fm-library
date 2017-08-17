@@ -1,0 +1,20 @@
+// list.Remove ( _list ; _position )
+// Purpose:		Removes the item from the list at the position.
+// Parameters:		_list:		The list to remove the item from
+//				_position:	The position to remove the item from
+// Version:		1.0 - Jim Feuerstein - 17-03-08
+// Notes:			Copyright © 2017 Labor Street
+// Example:		sample = result
+
+Let (
+  [
+    _size = ValueCount ( _list ) ;
+
+    _pre	= LeftValues ( _list ; _position - 1 ) ;
+    _post	= RightValues ( _list ; _size - _position ) ;
+
+    _result = _pre & _post
+  ] ;
+
+  _result
+)

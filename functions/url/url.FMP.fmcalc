@@ -1,0 +1,53 @@
+// url.FMP ( _filename ; _host )
+// Purpose:		special chain starter for building fmp URLs.
+// Parameters:		_filename:		optional name of the target file, defaults to current file
+//				_host:		optional address of the target host, defaults to current file's host
+// Requirements: 	urlb.Bookend
+//				urlb.VariableStart
+// Version:		1.0 - Todd Geist - 15-06-20
+// Notes:			If you don't pass in the two optional parameters, you get a URL that targets the current
+//				file.
+//				The format for FMP URLs is
+//				fmp://[[users:pw@]addr]/file[?script=name[&param=value][&$param=value]]
+//				http://www.modularfilemaker.org/module/urlbuilder/
+// Example:		// When called within "File.fmp12"…
+//				( url.FMP ( "" ; "" ) & 
+//				  url.Param ( "script" ; "New Contact" ) & 
+//				  url.Param ( "firstName" ; "Todd" ) & 
+//				  url.Param ( "lastName" ; "Geist" )  & 
+//				  url.Bookend ( "" )
+//				= "fmp://$/File?script=New%20Contact&%24firstName=Todd&%24lastName=Geist" )
+//				  and
+//				( url.FMP ( "Contacts" ; "192.168.45.1" ) &
+//				  url.Param ( "script" ; "New Contact" ) & 
+//				  url.Param ( "firstName" ; "Todd" ) & 
+//				  url.Param ( "lastName" ; "Geist" )  & 
+//				  url.Bookend ( "" )
+//				= "fmp://192.168.45.1/Contacts?script=New%20Contact&%24firstName=Todd&%24lastName=Geist" )
+
+Let (
+  [
+    _default_filename	= Get ( FileName ) ;
+    _default_host	= Case (
+      Get ( MultiUserState ) = system.MultiUserStateOff	; "$"
+											; Get ( HostIPAddress ) 
+    ) ;
+
+    _host = Case (
+      IsEmpty ( _host ) and IsEmpty ( _default_host )	; "://" ;
+      IsEmpty ( _host )							; _default_host
+										; _host
+    ) ;
+
+    _filename = Case(
+      IsEmpty ( _filename )	; _default_filename
+					; _filename
+    ) ;
+
+    _fmp = "fmp://" & _host & "/" & _filename
+
+  ];
+
+  // Assign this to the global variable for the chain.
+  url.Bookend ( _fmp ) 
+)

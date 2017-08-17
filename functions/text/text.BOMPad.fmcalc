@@ -1,0 +1,10 @@
+// text.BOMPad ( _text ; _length )
+// Purpose:		Pads _text at the beginning of the string with the _length number of byte order marks.
+// Parameters:		_text:	The text to pad.
+//				_length:	How many byte order marks to pad.
+// Version:		1.0 - Matt Petrowsky - 12-09-18 - inspired by Marcelo Piñeyro of Soliant consulting
+// Notes:			This is used to provide a custom sort order which can be based on the number of byte
+//				order marks that appear at the start of a string.
+// Example:		sample = result
+
+text.Pad ( _text ; Char ( 65279 ) ; _length ; "left" )

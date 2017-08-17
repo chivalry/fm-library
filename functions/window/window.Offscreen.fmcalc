@@ -1,0 +1,20 @@
+// window.Offscreen
+// Purpose:		Returns a large negative number for hiding offscreen utility windows, overriding this for
+//				developers.
+// Requirements:	devp.IsDeveloper
+// Author:			Charles Ross
+// Version:		1.0 - Charles Ross - 15-04-09
+//				1.1 - Charles Ross - 17-04-11 - Added ability for dev to override on screen with shift key
+// Example:		// Assuming the current user is not a developer...
+//				window.Offscreen = -9000
+
+Let (
+  [
+    _on_screen = dev.IsDeveloper and ( not modifier.KeyActive ( modifier.Shift ) )
+  ] ;
+
+  Case (
+    _on_screen	; 0
+			; -9000
+  )
+)

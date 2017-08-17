@@ -1,0 +1,10 @@
+// plat.IsiPad
+// Purpose:		Returns true if the system is running under on an iPad.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Notes:			Makes use of global variables $$_PLATFORM_OVERRIDE_IPAD and to allow the
+//				developer to override the return value during development and testing.
+// Example:		// While running the system on an iPad...
+//				plat.IsiPad = 1
+
+( platform.VersionName = platform.VersioniPad )
+  or $$_PLATFORM_OVERRIDE_IPAD

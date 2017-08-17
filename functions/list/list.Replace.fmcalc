@@ -1,0 +1,11 @@
+// list.Replace ( _list ; _item ; _position )
+// Purpose:		Replaces the item in the list at the position with the passed item.
+// Parameters:		_list:		The list to insert the item into
+//				_item:	The item to replace
+//				_position:	The position to insert the item at
+// Requirements: 	list.Insert
+//				list.Remove
+// Version:		1.0 - Charles Ross - 17-03-08
+// Example:		sample = result
+
+list.Insert ( list.Remove ( _list ; _position ) ; _item ; _position )

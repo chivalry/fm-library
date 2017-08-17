@@ -1,0 +1,12 @@
+// plat.IsGo
+// Purpose:		Returns true if the system is running under FileMaker Go.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Notes:			Makes use of global variables $$_PLATFORM_OVERRIDE_IPAD and
+//				$$_PLATFORM_OVERRIDE_IPHONE to allow the developer to override the return
+//				value during development and testing.
+// Example:		// While running the system on an iPad or iPhone...
+//				plat.IsGo = 1
+
+( Get ( SystemPlatform ) = platform.Go )
+  or $$_PLATFORM_OVERRIDE_IPAD
+  or $$_PLATFORM_OVERRIDE_IPHONE

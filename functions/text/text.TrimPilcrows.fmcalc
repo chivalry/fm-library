@@ -1,0 +1,25 @@
+// text.TrimPilcrows ( _text )
+// Purpose:		Remove pilcrow characters from the start and end of the text.
+// Parameters:		_text:	The text to remove the pilcrows from.
+// Requirements: 	text.StartsWith
+//				text.EndsWith
+// Version:		1.0 Jim Feuerstein
+// Notes:			This function may be unnecessary given the presence of text.SuperTrim
+// 				Copyright © 2017 Labor Street; https://opensource.org/licenses/MIT
+// Example:		sample = result
+
+Let (
+  [
+    _new_len = Length ( _text ) - 1
+  ] ;
+
+  Case (
+    text.StartsWith ( _text ; "¶" ) ;
+    text.TrimPilcrows ( Right ( _text ; _new_len ) ) ;
+
+    text.EndsWith ( _text ; "¶" ) ;
+    text.TrimPilcrows ( Left ( _text ; _new_len ) ) ;
+
+    _text
+  )
+)

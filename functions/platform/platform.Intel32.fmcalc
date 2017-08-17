@@ -1,0 +1,7 @@
+// platform.Intel32
+// Purpose:		A constant of what is returned by Get ( ApplicationARchitecture ) when running on
+//				Intel 32-bit.
+// Version:		1.0 - Charles Ross - 15-06-12
+// Example:		plat.Intel32 = "i386"
+
+"i386"

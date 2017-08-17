@@ -1,0 +1,7 @@
+// system.AllowAbortStateOn
+// Purpose:		A constant representing what Get ( AllowAbortState ) returns.
+// Version:		1.0 - Charles Ross - 15-06-21
+// Example:		// When evaluated after a script has turned on Allow User Abort…
+//				Get ( AllowAbortState ) = system.AllowAbortStateOn
+
+1

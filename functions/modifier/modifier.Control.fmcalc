@@ -1,0 +1,9 @@
+// modifier.Control
+// Purpose:		Returns the constant for the bit that is set when the control key is pressed.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Notes:			To be used with modifier.KeyActive
+// Example:		// When the alt or control key is pressed...
+//				modifier.Control = 3
+//				  and modifier.KeyActive ( modifier.Control )
+
+3

@@ -1,0 +1,8 @@
+// sortable.Time ( _time )
+// Purpose:		Returns a textual version of a time that will sort property as text.
+// Parameters:		_time:	The time to convert.
+// Version:		1.0 - Charles Ross - 15-03-11
+//				1.1 - Charles Ross - 17-03-07 - Leverage timestamp.Format
+// Example:		sortable.Time ( Time ( 3; 4; 15 ) ) = "030415"
+
+timestamp.Format ( GetAsTime ( _time ) ;"%H%m%S" )

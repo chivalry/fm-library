@@ -1,0 +1,10 @@
+// range.Weekdays ( _date_1 ; _date_2 )
+// Purpose:		Returns a list of the dates between the start and end dates (includsive) that are weekdays.
+// Parameters:		_start:	The earlier date (will be corrected if not earlier)
+//				_end:	The later date (will be corrected if not later)
+//				_ignore:	A list of dates to ignore
+// Requirements: 	requirements
+// Version:		1.0 - Charles Ross - 17-03-08
+// Example:		sample = result
+
+list.Subtract ( range.Dates ( _start ; _end ) ; _ignore )

@@ -1,0 +1,19 @@
+// text.Color ( _text ; _color )
+// Purpose:		Retunr the passed text colord with the named color or the word "remove"
+// Parameters:		_text:	The text to color
+//				_color:	The color to use.
+// Requirements: 	data.Colors
+//				let.Get
+// Version:		1.0 - Jim Feuerstein
+// Notes:			Copyright © 2017 Labor Street; https://opensource.org/licenses/MIT
+//				The remove/none options are for use in auto-enter fields where we may set
+//				the color under some conditions ( e.g. red for errors ) and don't want error
+//				color preserved when the condition is removed ( e.g. when the error is fixed )
+// Example:		text.Color ( "black" ) = 0 and text.Color ( "green" ) = 35600
+
+Case (
+  _color = "remove" or _color = "none" ;
+  TextColorRemove ( _text ) ;
+
+  TextColor ( _text ; let.Get ( data.Colors ; _color ) )
+)

@@ -1,0 +1,9 @@
+// text.CleanColorStyled ( _text )
+// Purpose:		Clear the colors and styles from the passed text.
+// Parameters:		_text:	The text to reformat.
+// Requirements: 	requirements
+// Version:		1.0 - Jim Feuerstein
+// Notes:			Copyright © 2017 Labor Street; https://opensource.org/licenses/MIT
+// Example:		sample = result
+
+text.Clean ( _text ; 0 ; 1 ; 1 ; 1 ; 0 ; 0 )

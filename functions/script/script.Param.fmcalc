@@ -1,0 +1,9 @@
+// script.Param
+// Purpose:		A convenience wrapper that only calls let.Set.
+// Parameters:		_name:	The name of the parameter to send
+//				_value:	The value to assign to the parameter
+// Requirements: 	let.Set
+// Version:		1.0 - Charles Ross - 17-03-08
+// Example:		sample = result
+
+let.Set ( _name ; _value )

@@ -1,0 +1,8 @@
+// platform.VersionWeb
+// Purpose:		A constant representing what the first word of Get ( ApplicationVersion ) returns to
+//				indicate a web client.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		// When evaluated while running under a web client...
+//				Get ( ApplicationVersion ) = platform.VersionWeb
+
+"Web"

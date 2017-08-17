@@ -1,0 +1,98 @@
+// let.Set ( _name ; _value )
+// Purpose:		Returns a name/value pair in Let notation.
+// Parameters:		_name:	The name for the returned name/value pair, name can be any value that
+//						would be a valid local variable name.
+//				_value:	The value for the returned name/value pair.
+// Requirements: 	devp.Nil
+//				devp.DataTypeMustBeText
+//				devp.IsDataType
+//				letn.EncloseInLet
+//				letn.EscapeComments
+//				errn.NameNotValid
+//				errn.GenericCalcError
+// Version:		created 12-11-10 by Jeremy Bante
+//				modified 12-11-28 by Jeremy Bante, to return error feedback and prefix names with "$".
+//				modified 12-12-07 by Jeremy Bante, corrected error result that could create invalid
+//					syntax for values containing a comment close sequence
+//				modified 12-12-12 by Daniel Smith, preserve data type of value
+//				modified 13-01-14 by Daniel Smith, include trailing return on error result and accept
+//					a value of "?"
+//				modified 13-04-15 by Jeremy Bante, to not wrap numbers in GetAsNumber
+//				modified 13-07-27 by Jeremy Bante, fix a type misidentification bug
+//				modified 13-09-02 by Daniel Smith, fix a type misidentification bug
+//				modified 13-12-12 by John Jones, explicitly encode line feed characters in text values
+//				modified 13-12-24 by Jeremy Bante, return an error if name contains a carriage return,
+//					remove explicit encoding for line feeds
+//				modified 14-05-25 by Jeremy Bante, detect type using a different method suggested by
+//					Arnold Kegebein
+//				modified 14-06-06 by Jeremy Bante, fix an issue where long sequences of digits could
+//					be interpreted as timestamps
+//				modified 14-10-07 by Daniel Smith, prevent from returning an EvaluationError
+//				1.13 modified 15-11-25 by Charles Ross, rework for custom function standards
+// Notes:			https://github.com/filemakerstandards/fmpstandards/blob/master/Functions/%23Name-Value/%23.fmfn
+// Todo:			To dos
+// Example:		let.Set ( "name" ; "value" ) = "$name = \"value\" ;¶"
+
+Let (
+  [
+    // strip leading "$$" and "$"
+    _name = Substitute (
+      "/*start*/" & _name ;
+      [ "/*start*/$$"	; dev.Nil ] ;
+      [ "/*start*/$"	; dev.Nil ] ;
+      [ "/*start*/"		; dev.Nil ]
+    ) ;
+
+    _is_valid_date	= not EvaluationError ( GetAsDate ( _value ) ) ;
+    _is_valid_time	= not EvaluationError ( GetAsTime ( _value ) ) ;
+    _number		= GetAsNumber ( _value ) ;
+
+    _value =  Case (
+      dev.DataTypeMustBeText ( _value ) ;
+      Quote ( _value ) ;
+
+      _is_valid_date
+        and _is_valid_time
+        and dev.IsDataType ( _value ; "timestamp" ) ;
+      "GetAsTimestamp ( " & Quote ( _value ) & " )" ;
+
+      _is_valid_time
+        and dev.IsDataType ( _value ; "time" ) ;
+      "GetAsTime ( " & Quote ( _value ) & " )" ;
+
+      _is_valid_date
+        and dev.IsDataType ( _value ; "date" ) ;
+      "GetAsDate ( " & Quote ( _value ) & " )" ;
+
+      _value ≠ _number ;
+      Quote ( _value ) ;
+
+      _number
+    ) ;
+
+    _result = "$" & _name & " = " & _value & " ;¶" ;
+
+    _test_expr = let._Enclose ( _result ) ;
+
+    _error = Case (
+      IsEmpty ( _name )
+        or ( Position ( _name ; ¶ ; 1 ; 1 ) ≠ 0 ) ;
+      err.NameNotValid ;
+
+      not IsValidExpression ( _test_expr ) ;
+      err.GenericCalcError
+    ) ;
+
+    // prevent bad pairs from affecting evaluation by commenting
+    _err_msg = "/* Error " & _error & " name: " &
+        let._EscapeComments ( _name ) & " value: " &
+        let._EscapeComments ( _value ) & " */" & ¶ ;
+
+    _result = Case (
+      _error		; _err_msg
+			; _result
+    )
+  ] ;
+
+  _result
+)

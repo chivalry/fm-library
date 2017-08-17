@@ -1,0 +1,15 @@
+// container.Interactivate ( _container )
+// Purpose:		Converts a non-interactive inserted file into one that can be interacted with.
+// Parameters:		_container:	The actual container field with the non-interactive file.
+// Requirements:	container.Rename
+// Version:		1.0 - Stephen Baker - 15-04-21
+// Notes:			http://www.teamdf.com/weetbicks/252/change-containers-from-files-to-interactive-content-in-an-instant
+// Example:		container.Interactivate ( Table::container ) // When inserted into a container field, the file can be interacted with
+
+Let (
+  [
+    _filename = GetContainerAttribute ( _container ; "FileName" )
+  ] ;
+
+  container.Rename ( _container ; _filename )
+)

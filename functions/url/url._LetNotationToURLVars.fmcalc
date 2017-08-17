@@ -1,0 +1,24 @@
+// Template
+// Purpose:		description
+// Parameters:		_param:	description
+// Requirements: 	requirements
+// Version:		1.0 - Charles Ross - 17-03-10
+// Notes:			Notes
+// Todo:			To dos
+// Example:		sample = result
+
+Case (
+  ValueCount ( _let_notation ) = 0 ;
+  dev.Nil ;
+
+  Let (
+    [
+      _name = let.First ( _let_notation ) ;
+      _value = let.Get ( _let_notation ; _name ) ;
+
+      _let_notation = let.Remove ( _let_notation ; _name )
+    ] ;
+
+    url.Param ( _name ; _value ) & url._LetNotationToURLVars ( _let_notation )
+  )
+)

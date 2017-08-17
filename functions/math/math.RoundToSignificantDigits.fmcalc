@@ -1,0 +1,21 @@
+// nump.RoundToSignificantDigits ( _number ; _digits )
+// Purpose:		Rounds the passed number to the passed significant digits.
+// Parameters:		_number:	The number to round
+//				_digits:	The number of significant digits to round to
+// Version:		1.0 written 15-11-06 by Charles Ross
+// Example:		( nump.RoundToSignificantDigits ( 12345.6789 ; 3 ) = 12300 )
+//				  and
+//				( nump.RoundToSignificantDigits ( 12345.6789 ; 6 ) = 12345.7 )
+
+Let (
+  [
+    // Find out how many integer digits the number has
+    _ceiling = Ceiling ( Log ( _number ) ) ;
+
+    _precision = ( _ceiling * -1 ) + _digits ;
+
+    _round = Round ( _number ; _precision )
+  ] ;
+
+  _round
+)

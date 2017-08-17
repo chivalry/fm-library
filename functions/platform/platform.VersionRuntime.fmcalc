@@ -1,0 +1,8 @@
+// platform.VersionRuntime
+// Purpose:		A constant representing what the first word of Get ( ApplicationVersion ) returns to
+//				indicate FileMaker Runtime.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		// When evaluated while running under FileMaker Runtime...
+//				Get ( ApplicationVersion ) = platform.VersionRuntime
+
+"Runtime"

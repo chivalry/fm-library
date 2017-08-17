@@ -1,0 +1,7 @@
+// system.MultiUserStateOff
+// Purpose:		A constant representing what Get ( MultiUserState ) returns to indicate sharing is off.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		// When evaluated while sharing is off...
+//				Get ( MultiUserState ) = sysk.MultiUserStateOff
+
+0

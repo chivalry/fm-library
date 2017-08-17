@@ -1,0 +1,43 @@
+// text.Clean ( _text ; _clear_pilcrows ; _trim ; _clear_font ; _clear_size ; _clear_color ; _clear_styles )
+// Purpose:		Conditionally clear formatting and carriage returns from passed text.
+// Parameters:		_text:
+//				_clear_pilcrows:	Clear pilcrows (carriage returns) if True
+//				_trim:			Trim spaces if True.
+//				_clear_font:		Use TextFontRemove if True.
+//				_clear_size:		Use TextSizeRemove if True
+//				_clear_color:		Use TextColorRemove if True
+//				_clear_styles:		Use TextStyleRemove if True
+// Requirements: 	text.TrimPilcrows
+// Version:		1.0 - Jim Feuerstein
+// Notes:			Copyright © 2017 Labor Street; https://opensource.org/licenses/MIT
+// Example:		sample = result
+
+Let (
+  [
+
+    _text = Case ( _clear_pilcrows	; Substitute ( _text ; "¶" ; "" )
+							; _text
+    ) ; 
+
+    _text = Case ( _trim	; Trim ( text.TrimPilcrows ( _text ) )
+					; _text
+    ) ;
+
+    _text = Case ( _clear_font	; TextFontRemove ( _text )
+						; _text
+    ) ;
+    _text = Case ( _clear_size	; TextSizeRemove ( _text )
+						; _text
+    ) ;
+
+    _text = Case ( _clear_color	; TextColorRemove ( _text )
+						; _text
+    ) ;
+
+    _text = Case ( _clear_styles	; TextStyleRemove ( _text ; AllStyles )
+						; _text
+    )
+  ] ;
+
+  _text
+)

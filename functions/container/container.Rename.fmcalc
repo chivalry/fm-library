@@ -1,0 +1,9 @@
+// container.Rename ( _container )
+// Purpose:		Renames a container field's file's name.
+// Parameters:		_container:	The actual container field with the non-interactive file.
+//				_filename:		The new name.
+// Version:		1.0 - Jan Stieperaere - 14-02-12
+// Notes:			http://clickworks.be/en/rename-container-files
+// Example:		container.Rename ( Table::container ; "new filename" ) // Container's file should now have the new filename.
+
+Base64Decode ( Base64Encode ( _container ) ; _filename )

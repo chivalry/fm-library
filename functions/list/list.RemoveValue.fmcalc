@@ -1,0 +1,9 @@
+// list.RemoveValue
+// Purpose:		Removes all occurrences of value from the list
+// Parameters:		_list:		The list to rmove the value from
+//				_value:	The value to remove from the list
+// Requirements: 	list.Subtract
+// Version:		1.0 - Charles Ross - 17-03-08
+// Example:		sample = result
+
+list.Subtract ( _list ; _value )

@@ -1,0 +1,19 @@
+// container.Encode ( _container )
+// Purpose:		Returns a Base64-encoded version of the container and filename.
+// Parameters:		_container:	The container data to encode
+// Requirements: 	requirements
+// Version:		1.0 - Charles Ross - 17-08-02
+// Notes:			Notes
+// Todo:			To dos
+// Example:		sample = result
+
+Let (
+  [
+    _json = json.ContainerObject ( _container )
+  ] ;
+
+  Case (
+    dev.IsSet ( _container )	; Base64EncodeRFC ( 46488 ; _json )
+					; dev.Nil
+  )
+)

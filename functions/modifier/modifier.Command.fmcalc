@@ -1,0 +1,9 @@
+// modifier.Command
+// Purpose:		Returns the constant for the bit that is set when the command (apple) key is pressed.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Notes:			To be used with modifier.KeyActive
+// Example:		// When the alt or command key is pressed...
+//				modifier.Command = 5
+//				  and modifier.KeyActive ( modifier.Command )
+
+5

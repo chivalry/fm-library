@@ -1,0 +1,9 @@
+// modifier.Alt
+// Purpose:		Returns the constant for the bit that is set when the alt (option) key is pressed.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Notes:			To be used with modifier.KeyActive
+// Example:		// When the alt or option key is pressed...
+//				modifier.Alt = 4
+//				  and modifier.KeyActive ( modifier.Alt )
+
+4

@@ -1,0 +1,37 @@
+// path.Filename
+// Purpose:		Return the filename given a file path
+// Parameters:		_path:	The path to the file
+//				_include_ext:	Boolean value, if True, return the extension as well.
+// Requirements: 	requirements
+// Version:		1.0 - Jim Feuerstein
+// Notes:			Copyright © 2017 Labor Street
+// Todo:			Extend funcitonality to work with Windows-based file paths
+// Example:		sample = result
+
+/* Copyright 2012 Magellan's Law Corporation
+
+FUNCTION */
+
+ Let (
+  [ 
+    _len = Length ( _path ) ; 
+ 
+    // Get the location of the rightmost slash in the path -- this marks the end of the directory that encloses the file
+    _pos = Position ( _path ; "/" ; _len ; -1 ) ; 
+ 
+    // Calcuate the length of the filename and extension
+    _len = _len - _pos ; 
+ 
+    // Extract the rightmost characters of the path that contain the filename and extension
+    _name = Right ( _path ; _len ) ;
+
+    // Depending on the boolean, we either return the filename ( fn ) or return the result after removing the extension
+    _result = Case (
+      _include_ext	; _name
+				; Left ( _name ; Position ( _name ; "." ; 1 ; 1 ) - 1 )
+    )
+
+  ] ;
+
+  _result
+)

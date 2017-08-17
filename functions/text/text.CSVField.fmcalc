@@ -1,0 +1,10 @@
+// text.CSVField ( _text ; _append_comma )
+// Purpose:		Prepares the text for inclusion in a CSV export.
+// Parameters:		_text:			The text to prepare
+//				_append_comma:	If True, a comma is appended to the end of the text
+// Requirements: 	text.EscapeDoubleQuotes
+// Version:		1.0 - Jim Feuerstein
+// Example:		sample = result
+
+"\"" & text.EscapeDoubleQuotes ( _text ) & "\"" &
+Case ( _append_comma ; "," )

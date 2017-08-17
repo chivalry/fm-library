@@ -1,0 +1,8 @@
+// platform.VersionName
+// Purpose:		A constant representing what Get ( SystemPlatform ) returns to indicate Windows.
+// Version:		1.0 - Charles Ross - 15-03-11
+//				1.1 edited 15-07-12 corrected bug that caught underscore as word separator
+// Example:		// When evaluated while running on the server…
+//				platform.VersionName = platform.VersionName
+
+GetValue ( Substitute ( Get ( ApplicationVersion ) ; " " ; "¶" ) ; 1 )

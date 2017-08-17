@@ -1,0 +1,32 @@
+// path.ParentFolder
+// Purpose:		Return the parent folder of the supplied path
+// Parameters:		_path:	The path to return the parent folder of
+// Version:		1.0 - Charles Ross
+// Notes:			This function does not query to operating system to determine whether the path is a
+//				file or folder it can only use information within the path - such as the existence of a
+//				trailing path separator
+// Example:		path.ParentFolder ( "/Volumes/Macintosh HD/Users/" ) = "/Volumes/Macintosh HD/"
+
+Let (
+  [
+    _mac_sep	= PatternCount ( _path ; "/" ) ;
+    _win_sep	= PatternCount ( _path ; "\\" ) ;
+
+    _sep = Case (
+        _mac_sep > 0		; "/"
+					; "\\"
+    ) ;
+
+    _ends_with_sep = ( Right ( _path ; 1 ) = _sep ) ;
+
+    _parts = Substitute ( _path ; _sep ; ¶ ) ;
+
+    _count = ValueCount ( _parts ) ;
+    _count = Case (
+      _ends_with_sep	; _count
+				; _count - 1
+    )
+  ] ;
+
+  Substitute ( LeftValues ( _parts ; _count - 1 ) ; ¶ ; _sep )
+)

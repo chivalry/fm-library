@@ -1,0 +1,14 @@
+// text.GetAsURLEncoded
+// Purpose:		Encoded additional characters than the built-in GetAsURLEncoded
+// Parameters:		_text:	The text to encode
+// Version:		1.0 - Charles Ross - 15-12-31
+// Notes:			For some reason, although the documentation for GetAsURLEncoded says it will encode
+//				non alphanumeric characters, it doesn't cover them all. As characters are found that need
+//				encoding, they'll be added to this function.
+// Example:		text.GetAsURLEncoded ( "12:34:56" ) = "12%3A34%3A56"
+
+Substitute (
+  GetAsURLEncoded ( _text ) ;
+
+  [ ":" ; "%3A" ]
+)

@@ -1,0 +1,34 @@
+// let.Assign ( _params )
+// Purpose:		Parses a Let dictionary of name-value parameters into a series of locally scoped
+//				$variables.
+// Parameters:		_params:	A Let notation dictionary, such as produced by letn.Set.
+// Requirements: 	let.Enclose
+// Version:		created 12-11-11 by Jeremy Bante
+//				modified 12-11-28 by Jeremy Bante, support "$" prefix values as default
+//				modified 13-03-15 by David Smith, update documentated return value
+//				modified 15-11-25 by Charles Ross, rework to conform to custom function standards,
+//					improve readability
+// Notes:			Returns 1 when _params is a valid set of name/value pairs (which includes the empty
+//				string, 0 otherwise. When 0 is returned, error code is sent to $_letn_Assign_error.
+// Example:		List (
+//				  let.Assign ( letn.Set ( "name" ; "value" ) ) ;
+//				  $name
+//				) = List ( 1 ; "value" )
+
+Let (
+  [
+    // Convert global variables to local variables
+    _params = Substitute (
+          ¶ & _params;
+          [ "¶$$"; "¶$" ]
+        ) ;
+
+    _code	= let._Enclose ( _params ) ;
+    _error	= EvaluationError ( Evaluate ( _code ) ) ;
+
+    _result = ( _error = 0 )						// indicate success or failure of Evaluate()
+      or Let ( $_letn_Assign_error = _error ; False )	// only runs on error
+  ];
+
+  _result
+)

@@ -1,0 +1,15 @@
+// list.Pad ( _list ; _count )
+// Purpose:		Appends empty values to the given list until the value count ≥ the given count.
+// Parameters:		_list:		The list to append empty values to
+//				_count:	The minimum number of values the result must have
+// Requirements: 	requirements
+// Version:		1.0 - Jim Feuerstein - 17-03-08
+// Notes:			Copyright © 2017 Labor Street
+// Example:		sample = result
+
+Case (
+  ValueCount ( _list ) ≥ _count ;
+  _list ;
+
+  list.Pad ( _list & "¶" ; _count )
+)

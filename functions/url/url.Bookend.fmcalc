@@ -1,0 +1,49 @@
+// url.URL ( _value )
+// Purpose:		Gets or sets the current URL
+// Parameters:		_value:	Optional, if passed, gets the current URL
+// Requirements:	devp.Nil
+//				text.StartsWith
+// Version:		1.0 - Todd Geist - 15-06-20
+// Notes:			Start and END all chains with this function, EXCEPT fmp URLs - use urlb.FMP for that.
+//				http://www.modularfilemaker.org/module/urlbuilder/
+// Example:		url.Bookend ( "http://www.geistinteractive.com" ) & 
+//				  url.Auth ( "admin" ; "password" ) & 
+//				  url.Path ( "contacts" ) &
+//				  url.Path ( "23345" ) &
+//				  url.Param ( "max" ; "100" ) &
+//				  url.Param ( "skip" ; "100" ) &
+//				  url.Bookend ("")
+//				= "http://admin:password@www.geistinteractive.com/contacts/23345?max=100&skip=100"
+
+Let (
+  [
+    // If no value is passed, return the final URL in the chain.
+    _result = Case (
+      IsEmpty ( _value )	; $$_URLB_CURRENT_URL
+					; dev.Nil
+    ) ;
+
+    // Remove the trailing slash if there is one.
+    _value = Case (
+      Right ( _value ; 1 ) = "fmp://"	; Left ( _value ; Length ( _value ) - 1 )
+							; _value
+    ) ;
+
+    _starts_with_protocol = text.StartsWith ( _value ; "http://" )
+      or text.StartsWith ( _value ; "https://" )
+      or text.StartsWith ( _value ; "fmp://" ) ;
+
+    // If the value already starts with a protocol, keep it, otherwise add a default protocol (http). If the value
+    // is blank because we're at the end of the chain, retain that, which will next clear out the global variable.
+    _value = Case(
+      _starts_with_protocol		; _value;
+      not IsEmpty( _value ) 		; "http://" & _value
+						; _value
+    ) ;
+
+    $$_URLB_CURRENT_URL = _value
+
+  ];
+
+  _result
+)

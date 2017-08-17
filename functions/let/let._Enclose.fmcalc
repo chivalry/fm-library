@@ -1,0 +1,15 @@
+// let.Enclose ( _params )
+// Purpose:		Surrounds the _params in a `Let` function for evaluation. The `Let` funciton itself
+//				returns an empty string.
+// Parameters:		_params:	The parameters to enclose within a `Let` function.
+// Version:		1.0 written 15-11-26 by Charles Ross
+// Notes:			Utility function only meant to be called by other functions.
+// Example:		let.Enclose ( letn.Set ( "name" ; "value" ) )
+//				  = "Let ( [¶$name = \"value\" ;¶¶_ = \"\"¶] ; _ )"
+
+List (
+  "Let ( ["		;
+  _params		;
+  "_ = dev.NIl"	; // Alows the params to terminate with a semicolon
+  "] ; _ )"
+)

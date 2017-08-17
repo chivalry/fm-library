@@ -1,0 +1,8 @@
+// script.AssignParams
+// Purpose:		Assume the current script parameter contains let notation and assign the variables defined therein.
+// Requirements: 	let.Assign
+// Version:		1.0 written 17-03-06 by Charles Ross
+// Example:		sample = result
+
+let.Assign ( Get ( ScriptParameter ) )
+  and script.ConfirmVars ( script._ReqParams ( dev.Nil ) )

@@ -1,0 +1,35 @@
+// timestamp.ConvertUnix ( _unix_timestamp )
+// Purpose:		Given a timestamp in standard Unix format, return a FileMaker timestamp.
+// Parameters:		_unix_timestamp: A string representing a standard Unix timestamp.
+// Requirements: 	list.CreateList
+//				date.ConvertUnixDate
+// Version:		1.0 written 15-08-24 by Charles Ross
+// Notes:			Standard Unix timestamp is "YYYY-MM-DD HH:MM:SS.SS". Fractional seconds are
+//				discarded.
+// Example:		timestamp.ConvertUnix ( "2015-08-24 10:47:42" )
+//				  = Timestamp ( Date ( 8 ; 24 ; 2015 ) ; Time ( 10 ; 47 ; 42 ) )
+
+Let (
+  [
+    _list		= list.CreateList ( _unix_timestamp ; " " ) ;
+    _date_string	= GetValue ( _list ; 1 ) ;
+    _time_string	= GetValue ( _list ; 2 ) ;
+
+    _date = date.ConvertUnixDate ( _date_string ) ;
+
+    _time_list	= list.CreateList ( _time_string ; ":" ) ;
+    _hour		= GetValue ( _time_list ; 1 ) ;
+    _minute	= GetValue ( _time_list ; 2 ) ;
+    _second	= Int ( GetValue ( _time_list ; 3 ) ) ;
+    _time		= Time ( _hour ; _minute ; _second ) ;
+
+    _timestamp = Timestamp ( _date ; _time ) ;
+
+    _result = Case (
+      IsEmpty ( _unix_timestamp ) or ( _timestamp = "?" ) ;	dev.Nil ;
+											_timestamp
+    )
+  ] ;
+
+  _result
+)

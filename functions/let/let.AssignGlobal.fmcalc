@@ -1,0 +1,26 @@
+// let.AssignGlobal ( _params )
+// Purpose:		Parses a Let dictionary of name-value parameters into a series of globally scoped
+//				$$VARIABLES
+// Parameters:		_params:	A Let format dictionary, such as produced by the letn.Set ( name ; value )
+//				function
+// Version:		1.0 written 12-12-04 by Jeremy Bante
+// Notes:			Returns 1 when _params is a valid set of name/value pairs (which includes the empty
+//				string, 0 otherwise. When 0 is returned, error code is sent to $letn.AssignGlobal.error.
+// Example:		sample = result
+
+Let (
+  [
+    // Convert local variables to global variables
+    _params = Substitute (
+          ¶ & _params;
+          [ "¶$$"	; "¶$"	] ; // without renaming existing globals
+          [ "¶$"	; "¶$$"	]
+        ) ;
+
+    _code	= let._Enclose ( _params ) ;
+    _error	= EvaluationError ( Evaluate ( _code ) )
+  ];
+
+  ( _error = 0 )	// indicate success or failure of Evaluate()
+    or Let ( $letn.AssignGlobal.error = _error ; False )	// only runs on error
+)

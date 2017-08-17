@@ -1,0 +1,10 @@
+// let.ContainsName ( _params ; _name )
+// Purpose:		Returns True if the name is defined in the parameters.
+// Parameters:		_params:	The list of parameters to check
+//				_name:	The name to look for
+// Requirements: 	list.IsMember
+//				let.GetNames
+// Version:		1.0 written 17-02-24 by Charles Ross
+// Example:		sample = result
+
+list.IsMember ( _name ; let.GetNames ( _params ) )

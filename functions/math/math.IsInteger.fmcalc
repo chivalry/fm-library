@@ -1,0 +1,7 @@
+// math.IsInteger ( _number )
+// Purpose:		Returns true if the number is an integer.
+// Parameters:		_number:	The number to test for being an integer.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		( math.IsInteger ( 6 ) = 1 ) and ( math.IsInteger ( 3.14 ) = 0 )
+
+Int( _number ) = _number

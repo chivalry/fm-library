@@ -1,0 +1,24 @@
+// range.WeekdaysYYYYMMDD ( _date_1 ; _date_2 ; _ignore )
+// Purpose:		Return a list of weekdays between the first and last date, inclusive, with each date in YYYYMMDD format
+//				excluding those in the ignore list.
+// Parameters:		_start:	The earlier date (will be corrected if not earlier)
+//				_end:	The later date (will be corrected if not later)
+//				_ignore:	The list of dates to exclude.
+// Requirements: 	timestamp.Format
+//				list.CustomList
+// Version:		1.0 - Charles Ross - 17-03-08
+// Example:		sample = result
+
+Let (
+  [
+    $_range_weekdaysyyyymmdd_list = range.Weekdays ( _start ; _end ; _ignore ) ;
+
+    _code = "date.YYYYMMDD ( GetValue ( $_range_weekdaysyyyymmdd_list ; %n ) )" ;
+
+    _result = list.CustomList ( 1 ; ValueCount ( $_range_weekdaysyyyymmdd_list ) ; _code ) ;
+
+    $_range_weekdaysyyyymmdd_list = dev.Nil
+  ] ;
+
+  _result
+)

@@ -1,0 +1,22 @@
+// range.DatesYYYYMMDD ( _date_1 ; _date_2 )
+// Purpose:		Return a list of dates between the first and last date, inclusive, with each date in YYYYMMDD format.
+// Parameters:		_date_1: The earlier date (will be corrected if not earlier)
+//				_date_2: The later date (will be corrected if not later)
+// Requirements: 	timestamp.Format
+//				list.CustomList
+// Version:		1.0 - Charles Ross - 17-03-08
+// Example:		sample = result
+
+Let (
+  [
+    $_range_dateyyyymmdd_list = range.Dates ( _date_1 ; _date_2 ) ;
+
+    _code = "date.YYYYMMDD ( GetValue ( $_range_dateyyyymmdd_list ; %n ) )" ;
+
+    _result = list.CustomList ( 1 ; ValueCount ( $_range_dateyyyymmdd_list ) ; _code ) ;
+
+    $_range_dateyyyymmdd_list = dev.Nil
+  ] ;
+
+  _result
+)

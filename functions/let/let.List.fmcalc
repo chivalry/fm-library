@@ -1,0 +1,61 @@
+// let.List ( _value )
+// Purpose:		Encoded value with trailing return and data type preserved
+// Parameters:		_value:	The value to encode
+// Requirements: 	dev.IsDataType
+//				dev.Nil
+// Version:		1.0 written 12-11-26 by Daniel Smith
+//				1.1 edited 13-05-09 by Daniel Smith to encode a value like the current version of
+//					letn.Set custom function
+//				1.2 edited 13-12-24 by Jeremy Bante to specially encode newline characters in values,
+//					and to update type detection to match the # function.
+//				1.3 edited 14-05-26 by Jeremy Bante to detect type using a different method suggested
+//					by Arnold Kegebein.
+//				1.4 edited 14-06-06 by Jeremy Bante to fix an issue where long sequences of digits
+//					could be interpreted as timestamps.
+//				1.5 edited 15-11-26 by Charles Ross to conform to custom function library standards
+// Example:		let.List ( "value1" )
+//				  & let.List (
+//				  let.List ( "subValue" )
+//				  & let.List ( "subValue2" )
+//				) = "\"value1\"¶\"\\\"subValue\\\"\¶\\\"subValue2\\\"\¶\"¶"
+
+Let (
+  [
+    _number = GetAsNumber ( _value ) ;
+
+    _value = Case (
+      dev.DataTypeMustBeText ( _value ) ;
+      Quote ( _value ) ;
+
+      dev.IsDataType ( _value ; "timestamp" ) ;
+      "GetAsTimestamp ( " & Quote ( _value ) & " )" ;
+
+      dev.IsDataType ( _value ; "time" ) ;
+      "GetAsTime ( " & Quote ( _value ) & " )" ;
+
+      dev.IsDataType ( _value ; "date" ) ;
+      "GetAsDate ( " & Quote ( _value ) & " )" ;
+
+      _value ≠ _number ;
+      Substitute ( Quote ( _value ) ;
+        [ Char ( 10 )	; "\" & Char ( 10 ) & \""	] ;
+        [ Char ( 8232 )	; "\" & Char ( 8232 ) & \""	] ;
+        [ Char ( 8233 )	; "\" & Char ( 8233 ) & \""	]
+      ) ;
+
+      _number
+    ) ;
+
+    _result = Case (
+      IsValidExpression ( _value )
+        // The following `Evaluate` slows the calc by ~30%, only include during dev and debug
+        // and Evaluate ( _value ) = _value
+      ;
+      _value & ¶ ;
+
+      "/* Error " & err.GenericCalcError & " value: " & let._EscapeComments ( _value ) & " */" & ¶
+    )
+  ] ;
+
+  _result
+)

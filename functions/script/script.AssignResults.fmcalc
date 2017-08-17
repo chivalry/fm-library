@@ -1,0 +1,7 @@
+// script.AssignResults
+// Purpose:		Assume the current script result contains let notation and assign the variables defined therein.
+// Requirements: 	let.Assign
+// Version:		1.0 written 17-03-06 by Charles Ross
+// Example:		sample = result
+
+let.Assign ( Get ( ScriptResult ) )

@@ -1,0 +1,8 @@
+// text.PadSpaces ( _text; _space_count )
+// Purpose:		Pads the given string with the specified number of spaces.
+// Parameters:		_text:	The text to pad with spaces.
+//				_count:	How many times to pad the spaces.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		text.PadSpaces ( "text"; 5 ) = "     text"
+
+text.Pad ( _text; " "; _count; "left" )

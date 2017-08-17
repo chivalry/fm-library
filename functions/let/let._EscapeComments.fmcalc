@@ -1,0 +1,12 @@
+// let._EscapeComments ( _text )
+// Purpose:		Passes FileMaker calculation code and returns it with comments escaped.
+// Parameters:		_text:	The text to escape the comments of.
+// Version:		1.0 written 15-11-26 by Charles Ross
+// Notes:			Utility function only meant to be called by other functions.
+// Example:		sample = result
+
+Quote ( Substitute (
+  _text ;
+  [ "*/"	; "\*\/"	] ;
+  [ "/*"	; "\/\*"	]
+) )

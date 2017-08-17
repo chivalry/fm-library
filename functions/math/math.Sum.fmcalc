@@ -1,0 +1,25 @@
+// math.Sum ( _list )
+// Purpose:		Returns the sum of a list of numbers.
+// Parameters:		_list:	The list to produce the sum of.
+// Requirements: 	lsts.First
+//				lsts.Rest
+// Version:		1.0 - Charles Ross - 15-03-06
+// Notes:			Might it be better to write this as non-recursive, using Substitute to change the list to
+//				something that could be passed to Evaluate?
+// Example:		math.Sum ( "1¶2¶3" ) = 6
+
+Case (
+  // Recursive exit condition.
+  ValueCount ( _list ) = 0;	dev.Nil;
+
+  Let (
+    [
+      _first = list.First ( _list );
+      _rest = list.Rest ( _list );
+
+      _result = GetAsNumber ( _first ) + math.Sum( _rest )
+    ];
+
+    _result
+  )
+)

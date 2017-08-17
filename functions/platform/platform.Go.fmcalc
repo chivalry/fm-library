@@ -1,0 +1,7 @@
+// plat.Go
+// Purpose:		A constant representing what Get ( SystemPlatform ) returns to indicate iOS.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		// When evaluated while running under FileMaker Go...
+//				Get ( SystemPlatform ) = plat.Go
+
+3

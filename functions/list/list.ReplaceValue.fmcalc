@@ -1,0 +1,24 @@
+// list.ReplaceValue ( _lsit ; _old ; _new )
+// Purpose:		Replaces every occurrence of the old value in the list with the new value.
+// Parameters:		_list:		The list to replace the items in.
+//				_old:		The value to replace.
+//				_new:	The value to replace it with.
+// Requirements: 	list.ValuePosition
+//				list.Replace
+// Version:		1.0 - Charles Ross - 17-03-13
+// Example:		sample = result
+
+Case (
+  not list.IsMember ( _old ; _list ) ;
+  _list ;
+
+  Let (
+    [
+      _pos = list.ValuePosition ( _list ; _old ; 1 ; 1 ) ;
+
+      _list = list.Replace ( _list ; _new ; _pos )
+    ] ;
+
+    list.ReplaceValue ( _list ; _old ; _new )
+  )
+)

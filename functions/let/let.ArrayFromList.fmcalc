@@ -1,0 +1,31 @@
+// let.ArrayFromList ( _name ; _list )
+// Purpose:		Converts a return-delimited list to a Let notation array.
+// Parameters:		_name:	The name for the returned name/value pair.
+//				_list:		A return-delimited list of values.
+// Requirements: 	let.Array
+//				dev.ClearVars
+// Version:		1.0 written 13-07-26 by Jeremy Bante
+//				1.1 edited 15-11-26 by Charles Ross, use more descriptive variable names, restructure
+//					recursive code.
+// Example:		let.ArrayFromList ( "name" ; List ( "one" ; "two" ; "three" ) )
+//				  = "$name = \"one\" ;¶$name[2] = \"two\" ;¶$name[3] = \"three\" ;¶"
+
+Case (
+  ( not IsEmpty ( $_letn_ArrayFromList_count ) )
+    and ( $_letn_ArrayFromList_index = $_letn_ArrayFromList_count ) ;
+  dev.ClearVars ( List ( "$_letn_ArrayFromList_index" ; "$_letn_ArrayFromList_count" ) ) ;
+
+  Let (
+    [
+      $_letn_ArrayFromList_count	= ValueCount ( _list ) ;
+      $_letn_ArrayFromList_index	= $_letn_ArrayFromList_index + 1 ;
+
+      _value	= GetValue ( _list ; $_letn_ArrayFromList_index ) ;
+      _entry	= let.Array ( _name ; $_letn_ArrayFromList_index ; _value ) ;
+
+      _result = _entry & let.ArrayFromList ( _name ; _list )
+    ] ;
+
+    _result
+  )
+)

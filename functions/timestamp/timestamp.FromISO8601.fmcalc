@@ -1,0 +1,31 @@
+// timestamp.FromISO8601 ( _iso )
+// Purpose:		Converts an ISO8601 timestamp into a FileMaker timestamp.
+// Parameters:		_iso:		Text of an ISO8601 timestamp.
+// Requirements: 	lsts.CreateList
+// Version:		1.0 - Charles Ross - 15-12-22
+// Example:		timestamp.FromISO8601 (  "2015-12-01T20:34:56Z" ) = Timestamp ( Date ( 12 ; 1; 2015 ) ; Time ( 20 ; 34 ; 56 ) )
+
+Let (
+  [
+    _list = list.CreateList ( _iso ; "T" ) ;
+
+    _date_list = list.CreateList ( GetValue ( _list ; 1 ) ; "-" ) ;
+
+    _date = Date (
+      GetValue ( _date_list ; 2 ) ;
+      GetValue ( _date_list ; 3 ) ;
+      GetValue ( _date_list ; 1 )
+    ) ;
+
+    _time_list = list.CreateList ( GetValue ( _list ; 2 ) ; ":" ) ;
+
+    _time = Time (
+      GetValue ( _time_list ; 1 ) ;
+      GetValue ( _time_list ; 2 ) ;
+      GetAsNumber ( GetValue ( _time_list ; 3 ) )
+    )
+
+  ] ;
+
+  Timestamp ( _date ; _time )
+)

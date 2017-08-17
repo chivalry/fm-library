@@ -1,0 +1,29 @@
+// list.Subtract ( _list_1; _list_2 )
+// Purpose:		Returns the elements in _list_1 that do not exist in _list_2.
+// Parameters:		_list_1: A list of items
+//              		_list_2: A list of items that should have at least some members in common with _list_1.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Notes:			Is this the mathematical concept of relative complement?
+// Example:		lsts.Subtract ( "1¶2¶3"; "2¶3¶4" ) = "1"
+//				  and lsts.Subtract ( "2¶3¶4"; "1¶2¶3" ) = "4"
+
+Case (
+  ValueCount ( _list_1 ) = 0;
+  dev.Nil;
+
+  Let (
+    [
+      _first = list.First ( _list_1 );
+      _rest = list.Rest ( _list_1 );
+
+      _is_member = list.IsMember ( _first; _list_2 );
+
+      _entry = Case (
+        _is_member;	dev.Nil;
+				_first & "¶"
+      )
+    ];
+
+    _entry & list.Subtract ( _rest; _list_2 )
+  )
+)

@@ -1,0 +1,8 @@
+// list.CreateList ( _text ; _separator )
+// Purpose:		Returns a list where each item in the list is delineated by the _separator.
+// Parameters:		_text:		The text to create the list from.
+//				_separator:	The character that separates each item in the list.
+// Version:		1.0 written 15-08-24 by Charles Ross
+// Example:		list.CreateList ( "1,2,3" ; "," ) = List ( 1 ; 2 ; 3 )
+
+Substitute ( _text ; _sep ; "¶" )

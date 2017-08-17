@@ -1,0 +1,7 @@
+// system.ErrorCaptureOff
+// Purpose:		A constant representing what Get ( ErrorCaptureState ) returns.
+// Version:		1.0 - Charles Ross - 15-06-21
+// Example:		// When evaluated after a script has turned off error capture
+//				system.ErrorCaptureIsOff
+
+Get ( ErrorCaptureState ) = 0

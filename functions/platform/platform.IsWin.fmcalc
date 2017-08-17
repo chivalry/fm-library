@@ -1,0 +1,12 @@
+// plat.IsWin
+// Purpose:		Returns True if the system is running under Windows.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Notes:			Makes use of global variables $$_PLAT_OVERRIDE_IPAD and
+//				$$_PLAT_OVERRIDE_IPHONE to allow the developer to override the return
+//				value during development and testing.
+// Example:		// While running the system on Windows...
+//				plat.IsWin = 1
+
+( Get( SystemPlatform ) = platform.Win )
+  and ( not $$_PLATFORM_OVERRIDE_IPAD )
+  and ( not $$_PLATFORM_OVERRIDE_IPHONE )

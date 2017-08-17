@@ -1,0 +1,56 @@
+// text.Oxfordize ( _items )
+// Purpose:		Return a string with the Oxford comma separate for three or more items.
+// Parameters:		_items:		The items to return as Oxfordized
+//				_conjunction:	The conjunction to place between the last and second to last
+//							items, should be "and" or "or".
+//				_quote:		A boolean value, if `True`, place each item in quotes (with
+//							comma also in quotes).
+// Requirements: 	list.CustomList
+//				list.ReplaceSeparator
+// Version:		1.0 - Charles Ross - 17-03-16
+// Example:		sample = result
+
+Case (
+  ValueCount ( _items ) = 0 ;
+  dev.Nil ;
+
+  ValueCount ( _items ) = 1 and _quote ;
+  Quote ( _items ) ;
+
+  ValueCount ( _items ) = 1 ;
+  _items ;
+
+  ValueCount ( _items ) = 2 and _quote ;
+  Quote ( GetValue ( _items ; 1 ) ) & " " & _conjunction & " " & Quote ( GetValue ( _items ; 2 ) ) ;
+
+  ValueCount ( _items ) = 2 ;
+  GetValue ( _items ; 1 ) & " " & _conjunction & " " & GetValue ( _items ; 2 ) ;
+
+  Let (
+    [
+      $_tailless_items = LeftValues ( _items ; ValueCount ( _items ) - 1 ) ;
+
+      _tailless_items = Case (
+        _quote	; list.CustomList ( 1 ; ValueCount ( $_tailless_items ) ; "Quote ( GetValue ( $_tailless_items ; %n ) & \",\" ) " )
+			; list.ReplaceSeparator ( $_tailless_items ; ", " )
+      ) ;
+
+    $_tailless_items = dev.Nil ;
+
+    _tailless_items = Case (
+      _quote	; list.ReplaceSeparator ( _tailless_items ; " " ) & " "
+			; _tailless_items
+    ) ;
+
+    _last_item = GetValue ( _items ; ValueCount ( _items ) ) ;
+    _result = _tailless_items & _conjunction & " " & Case (
+      _quote	; Quote ( _last_item )
+			; _last_item
+    ) ;
+
+      _ = ""
+    ] ;
+
+    _result
+  )
+)

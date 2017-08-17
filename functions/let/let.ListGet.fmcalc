@@ -1,0 +1,23 @@
+// let.ListGet ( _values ; _index )
+// Purpose:		Retrieve a value from a list created with the #List ( value ) function. Preserve the data
+//				type and all special characters of the original value.
+// Parameters:		_values:	List of encoded values
+//				_index:	The position of the value to retrieve
+// Version:		1.0 written 12-11-26 by Daniel Smith
+// Example:		let.ListGet ( let.List ( "value1" ) & letn.List ( "value2" ) ; 1 ) = "value1"
+//				  and let.ListGet ( let.List ( "" ) & letn.List ( "value2" ) ; 2 ) = "value2"
+//				  and let.ListGet ( let.List ( "value1" ) & letn.List ( "value2" ) ; 3 ) = ""
+//				  and let.ListGet ( "This is not a valid #List string" ; 1 ) = ""
+
+Let (
+  [
+    _value = GetValue ( _values ; _index ) ;
+
+    _result = Case (
+      IsValidExpression ( _value )	; Evaluate ( _value )
+						; dev.Nil
+    )
+  ] ;
+
+  _result
+)

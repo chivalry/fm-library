@@ -1,0 +1,48 @@
+// let.Get ( _params ; _name )
+// Purpose:		Returns the value of name from the list of parameters, assumed to be in Let notation.
+// Parameters:		_params:	Name/value paris in Let notation
+//				_name:	The name of the value to retrieve
+// Requirements: 	dev.Nil
+// Version:		1.0 written 12-12-05 by Jeremy Bante
+//				1.1 edited 13-01-08 by Jeremy Bante to handle leading $$ and $ in the name parameter
+//					the same as the letn.Set function, based on a comment by Dan Smith.
+//				1.2 edited 15-11-26 by Charles Ross, conform to custom function library standards
+// Example:		let.Get ( letn.Set ( "var" ; "foo" ) ; "var" ) = "foo"
+
+Let (
+  [
+    _params = ¶ & _params & ¶;
+
+    // strip any leading $$ or $ for backwards compatibility
+    _name = Substitute (
+      ¶ & _name ;
+      [ "¶$$"	; dev.Nil ] ;
+      [ "¶$"		; dev.Nil ] ;
+      [ ¶		; dev.Nil ]
+    ) ;
+
+    _length = Length ( _params );
+
+    // position of last occurrence of name
+    _position = Position ( _params ; "¶$" & _name & " = " ; _length ; -1 );
+
+    // check for $$global name for backwards compatibility
+    _position = Case (
+      _position > 0	; _position
+				; Position ( _params ; "¶$$" & _name & " = " ; _length ; -1 )
+    ) ;
+
+    _start	= Position ( _params ; " = " ; _position ; 1 ) + 3;
+    _end	= Position ( _params ; ";¶" ; _position ; 1 );
+    _value	= Middle ( _params ; _start ; _end - _start ) ;
+
+    // check that _value exists and is valid
+    _result = Case (
+      ( _position > 0 )
+        and IsValidExpression ( _value );
+      Evaluate ( _value )
+    )
+  ];
+
+  _result
+)

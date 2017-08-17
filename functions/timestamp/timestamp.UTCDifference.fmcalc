@@ -1,0 +1,10 @@
+// timestamp.UTCDifference
+// Purpose:		Returns the time difference between the current timezone and UTC. 
+// Version:		1.0 - Jeremy Bante - 14-05-18
+// Notes:			https://www.briandunning.com/cf/1442
+//				Adding the results to UTC time should give the local time, while subtracting this from the
+//				local time should give UTC time.
+// Example:		// When run in California…
+//				timestamp.UTCDifference = "-8:00:00"
+
+Get ( CurrentTimestamp ) - GetAsTimestamp ( Floor ( Get ( CurrentTimeUTCMilliseconds ) / 1000 ) )

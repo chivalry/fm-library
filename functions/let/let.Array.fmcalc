@@ -1,0 +1,22 @@
+// let.Array ( _name ; _index ; _value )
+// Purpose:		Serves as syntactic sugar for creating array values in Let notation.
+// Parameters:		_name:	The name for the returned name/value pair, can be any value that would be a
+//						valid local variable name
+//				_index:	A numeric index for a repeating variable.
+//				_value:	The value for the returned name/value pair.
+// Requirements: 	let.Set
+//				let.IndexedName
+// Version:		1.0 written 13-07-26 by Jeremy Bante
+//				1.1 edited 15-11-26 by Charles Ross, improve readability, use letn.IndexedName.
+// Example:		let.Array ( "name" ; 1 ; "foo" ) & let.Array ( "name" ; 2 ; "bar" )
+//				  = "$name = \"foo\" ;¶$name[2] = \"bar\" ;¶"
+
+Let (
+  [
+    _indexed_name = let._IndexedName ( _name ; _index ) ;
+
+    _result = let.Set ( _indexed_name ; _value )
+  ] ;
+
+  _result
+)

@@ -1,0 +1,29 @@
+// plugin.Version ( _plugin_name )
+// Purpose:		Returns True if the named plugin is installed and enabled.
+// Parameters:		_plugin_name:	The name of the plugin to check for
+// Requirements:	plugin.Attribute
+// Version:		1.0 - Charles Ross - 15-04-16
+//				1.1 - Charles Ross - 15-04-19 abstracted out plug.Attribute.
+// Todo:			See if there's a way to make this function compatible with 11-.
+// Example:		// Assuming ScriptMaster is installed and at version 4.32...
+//				plugin.Version ( "360Works ScriptMaster" ) = 4.32
+
+Let(
+  [
+    _plugins = Get ( InstalledFMPlugins );
+
+    _installed = PatternCount (
+      _plugins;
+      _name
+    );
+
+    _version = plugin.Attribute ( _name; 2 );
+
+    _result = Case (
+      _installed;	_version;
+			0
+    )
+  ];
+
+  _result
+)

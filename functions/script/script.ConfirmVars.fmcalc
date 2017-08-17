@@ -1,0 +1,46 @@
+// script.ConfirmVars ( _names )
+// Purpose:		Returns True (1) if the names passed each have non-empty values in local variables.
+// Parameters:		_names:	A return-delimited list of names to check, do not need to be prefixed with $
+// Version:		1.0 written 12-12-07 by Jeremy Bante
+//				1.1 edited 13-07-05 by Jeremy Bante to support one trailing return in the nameList
+//					parameter.
+//				1.2 edited 13-07-10 by Jeremy Bante to correct a bug with support for trailing returns.
+// Notes:			Names containing "$" or "$$" prefixes will be treated as identical to names not
+//				beginning with those prefixes — this function only checks for local $variables.
+// Example:		sample = result
+
+Case (
+  IsEmpty ( _names ) ;
+  True ;
+
+  Let (
+    [
+      // Provide sentinels at for the beginning and end of the list.
+      _start	= Get ( UUID ) ;
+      _end	= Get ( UUID ) ;
+
+      // normalize _names so all values begin with "$"
+      _names = Substitute (
+        _start & ¶ & _names & _end ;
+        [ ¶ & _end		; dev.Nil	] ;
+        [ _end		; dev.Nil	] ;
+        [ "¶$$"		; "¶"		] ;
+        [ "¶$"		; "¶"		] ;
+        [ "¶"			; "¶$"	] ;
+        [ _start & ¶	; dev.Nil	]
+      ) ;
+
+      // Separate multiple names with additional tests
+      _names = Substitute (
+        _names ;
+        [ "¶" ; " )¶and not IsEmpty ( " ]
+      ) ;
+
+      _code = "not IsEmpty ( " & _names & " ) " ;
+
+      _result = IsValidExpression ( _code ) and Evaluate ( _code )
+    ] ;
+
+    _result
+  )
+)

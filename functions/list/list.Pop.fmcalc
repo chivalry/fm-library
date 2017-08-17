@@ -1,0 +1,27 @@
+// list.Pop ( _var_name )
+// Purpose:		Pops the virst value off of the named variable and returns it.
+// Parameters:		_var_name:	The name of the variable to pop the first value off of.
+// Requirements: 	list.First
+//				list.Rest
+// Version:		1.0 written 15-03-11 by Geoff Coffey
+// Notes:			http://sixfriedrice.com/wp/pop-goes-the%E2%80%A6um%E2%80%A6variable/
+// Example:		Let (
+//				  [
+//				    $_var = "1¶2¶3";
+//				    _first = list.Pop ( "$_var" )
+//				  ];
+//				  $_var
+//				) = "2¶3"
+
+Let (
+  [
+    _list	= Evaluate ( _var_name );
+    _first	= list.First ( _list );
+
+    _calc = "Let ( " & _var_name & " = list.Rest ( " & _var_name & " ); dev.Nil )";
+
+    _ = Evaluate ( _calc )
+  ];
+
+  _first
+)

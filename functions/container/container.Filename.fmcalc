@@ -1,0 +1,7 @@
+// container.Filename ( _container )
+// Purpose:		Return the name of the file stored in the container.
+// Parameters:		_container:	The container to return the name of
+// Version:		1.0 - Charles Ross - 17-08-11
+// Example:		sample = result
+
+GetContainerAttribute ( _container ; "FileName" )

@@ -1,0 +1,13 @@
+// let._IndexedName
+// Purpose:		Assuming a valid name and index, returns the name with FileMaker's index notation.
+// Parameters:		_name:	The name to index
+//				_index:	The index to use
+// Version:		1.0 written 15-11-26 by Charles Ross
+// Notes:			Utility function only meant to be called by other functions.
+// Example:		letn.IndexedName ( "name" ; 5 ) = "name[5]"
+
+_name &
+Case (
+  _index ≠ 1 or IsEmpty ( _name )	; "[" & _index & "]"
+							; dev.Nil
+)

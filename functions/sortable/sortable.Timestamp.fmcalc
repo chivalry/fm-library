@@ -1,0 +1,10 @@
+// sortable.Timestamp ( _timestamp )
+// Purpose:		Returns a textual version of a timestamp that will sort property as text.
+// Parameters:		_timestamp:	The timestamp to convert.
+// Requirements:	sortable.Date
+//				sortable.Time
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		sortable.Timestamp ( Timestamp ( Date ( 10; 1; 2008 ); Time ( 3; 4; 15 )  ) ) = "20081001030415"
+
+sortable.Date( GetAsDate( _timestamp ) ) &
+  sortable.Time( GetAsTime( _timestamp ) )

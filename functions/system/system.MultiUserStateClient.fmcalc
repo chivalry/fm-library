@@ -1,0 +1,8 @@
+// system.MultiUserStateClient
+// Purpose:		A constant representing what Get ( MultiUserState ) returns to indicate accessing a
+//				database from a client computer.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		// When evaluated while accessing the database from a client computer...
+//				Get ( MultiUserState ) = system.MultiUserStateClient
+
+2

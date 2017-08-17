@@ -1,0 +1,9 @@
+// sortable.Date ( _date )
+// Purpose:		Returns a textual version of a date that will sort property as text.
+// Parameters:		_date:	The date to convert.
+// Requirements:	timestamp.Format
+// Version:		1.0 - Charles Ross - 15-03-11
+//				1.1 - Charles Ross - 17-03-07 - Leverage timestamp.Format.
+// Example:		sortable.Date ( Date ( 10; 1; 2008 ) ) = "20081001"
+
+timestamp.Format ( GetAsTimestamp ( Date ( 3; 27; 15 ) ) ;"20%Y%m%d" )

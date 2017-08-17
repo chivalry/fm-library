@@ -1,0 +1,33 @@
+// Template
+// Purpose:		description
+// Parameters:		_param:	description
+// Requirements: 	requirements
+// Version:		1.0 - Charles Ross - 17-03-10
+// Notes:			Notes
+// Todo:			To dos
+// Example:		sample = result
+
+Let (
+  [
+    _ = url.FMP ( "" ; "" ) ;
+
+    _ = Case (
+      dev.IsSet ( _script ) ;
+      url.Param ( "script" ; _script )
+    ) ;
+
+    _ = Case (
+      dev.IsSet ( _param ) ;
+      url.Param ( "param" ; _param )
+    ) ;
+
+    _ = Case (
+      ValueCount ( _vars ) > 0 ;
+      url._LetNotationToURLVars ( _vars )
+    ) ;
+
+    _result = url.Bookend ( "" )
+  ] ;
+
+  _result
+)

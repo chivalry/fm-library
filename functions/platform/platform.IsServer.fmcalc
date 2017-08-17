@@ -1,0 +1,7 @@
+// plat.IsServer
+// Purpose:		Returns true if the system is running under on FileMaker Server.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		// While running the system on FileMaker Server...
+//				plat.IsServer = 1
+
+platform.VersionName = platform.VersionServer

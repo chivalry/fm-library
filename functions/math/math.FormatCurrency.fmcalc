@@ -1,0 +1,8 @@
+// math.FormatCurrency ( _number )
+// Purpose:		Converts the number to a currency representation of dollars and cents.
+// Parameters:		_number:	The amount of money to represent.
+// Requirements: 	numbers.Format
+// Version:		1.0 written 15-03-11 by Charles Ross
+// Example:		math.FormatCurrency ( 12345.67 ) = "$12,345.67"
+
+"$" & math.Format ( _number; 2; "," )

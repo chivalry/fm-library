@@ -1,0 +1,14 @@
+// timestamp.ClockTime
+// Purpose:		Return the time formatted for standard display.
+// Parameters:		_time:	The time to format
+// Requirements: 	timestamp.Format
+// Version:		1.0 - Charles Ross - 17-03-08
+// Example:		timestamp.ClockTime ( Time ( 15 ; 6 ; 1 ) ) = "3:06 pm"
+
+Let (
+  [
+    _time = GetAsTime ( _time )
+  ] ;
+
+  timestamp.Format ( _time ; "%l:%M %p" )
+)

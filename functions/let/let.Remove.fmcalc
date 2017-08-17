@@ -1,0 +1,95 @@
+// let.Remove
+// Purpose:		Returns a Let notation string from _params with names found in _remove taken out.
+// Parameters:		_params:	A Let notation string
+//				_remove:	The list of names to remove
+// Requirements: 	devp.Nil
+// Version:		1.0 written 12-12-20 by Daniel Smith
+//				1.1 edited 13-01-08 by Jeremy Bante to extend the function to remove multiple names from
+//					a return-delimited list
+//				1.2 edited 13-03-15 by Daniel Smith to add trailing return if it doesn't exist
+//				1.3 edited 13-12-23 by John Jones to use Middle/Position instead of GetValue
+//				1.4 edited 13-12-24 by Jeremy Bante to improve efficiency
+//				1.5 edited 15-11-26 by Charles Ross, improve readability, conform to standards
+// Example:		let.Remove ( let.Set ( "var_1" ; "val_1" ) & let.Set ( "var_2" ; "val_2" ) ; "var_1" )
+//				  = let.Set ( "var_2" ; "val_2" )
+
+Case (
+  // ========================================
+  // Step 0, set-up
+  not $_letn_Remove_step ;
+  Let (
+    [
+      _empty = IsEmpty ( _params ) or IsEmpty ( _remove ) ;
+
+      // add "$" prefix for matching
+      _remove = Substitute ( ¶ & _remove ; ¶ ; "¶$" ) ;
+
+      // add "$$" prefix for backwards-compatibility
+      _remove = _remove & Substitute ( _remove ; ¶ ; "¶$" ) & ¶ ;
+
+      $_letn_Remove_length = Length ( _params ) ;
+
+      $_letn_Remove_step = Case (
+        _empty	; -1
+			; 1
+      )
+    ] ;
+
+    let.Remove ( _params ; _remove )
+  ) ;
+
+  // ========================================
+  // Step 1, check each parameter
+  $_letn_Remove_step = 1 ;
+  Let (
+    [
+      _start				= $_letn_Remove_end + 1 ;
+      $_letn_Remove_end	= Position ( _params ; ¶ ; _start ; 1 ) ;
+      _end_of_list		= $_letn_Remove_end = 0 ;
+
+      _length = Case (
+        _end_of_list	; $_letn_Remove_length + 1
+				; $_letn_Remove_end
+      ) - _start ;
+
+      _pair		= Middle ( _params ; _start ; _length ) ;
+      _name		= Left ( _pair ; Position ( _pair ; " = " ; 1 ; 1 ) - 1 ) ;
+
+      // only include if ~name is not in removeParameters
+      _include = ( not IsEmpty ( _name ) )
+        and ( Position ( _remove ; ¶ & _name & ¶ ; 1 ; 1 ) = 0 ) ;
+
+      $_letn_Remove_result = $_letn_Remove_result & Case ( _include ; _pair & ¶ ) ;
+
+      _end_of_list = _end_of_list
+      or ( $_letn_Remove_end ≥ $_letn_Remove_length ) ;
+
+      $_letn_Remove_step = Case (
+        _end_of_list	; 2
+				; 1
+      )
+    ] ;
+
+    let.Remove ( _params ; _remove )
+  ) ;
+
+  // ========================================
+  // Step 2, clean-up and return result
+  ( $_letn_Remove_step = 2 )
+    or ( $_letn_Remove_step = -1 ) ;
+  Let (
+    [
+      _empty = $_letn_Remove_step = -1 ;
+      _result = Case (
+        _empty	; _params
+			; $_letn_Remove_result
+      ) ;
+
+      // purge variables
+      _var_list = List ( "$_letn_Remove_end" ; "$_letn_Remove_length" ; "$_letn_Remove_result" ; "$_letn_Remove_step" ) ;
+      _ = dev.ClearVars ( _var_list )
+    ] ;
+
+    _result
+  )
+)

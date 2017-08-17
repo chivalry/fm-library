@@ -1,0 +1,10 @@
+// timestamp.ToISO8601 ( _timestamp )
+// Purpose:		Converts a FileMaker timestamp into the ISO8601 format.
+// Parameters:		_timestamp:	The timestamp to convert
+// Requirements: 	timestamp.FormatTimestamp
+//				timestamp.UTCDifference
+// Notes:			Converts to the version that uses UTC time instead of providing the time zone offset.
+// Version:		1.0 - Charles Ross - 15-12-22
+// Example:		timestamp.ToISO8601 ( Timestamp ( Date ( 12 ; 1; 2015 ) ; Time ( 12 ; 34 ; 56 ) ) ) = "2015-12-01T20:34:56Z"
+
+timestamp.Format ( _timestamp - timestamp.UTCDifference ; "%Y-%m-%dT%TZ" )

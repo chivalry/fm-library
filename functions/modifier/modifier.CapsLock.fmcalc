@@ -1,0 +1,9 @@
+// modifier.CapsLock
+// Purpose:		Returns the constant for the bit that is set when the caps lock key is on.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Notes:			To be used with modifier.KeyActive
+// Example:		// When the caps lock key is active…
+//				modifier.CapsLock = 2
+//				  and modifier.KeyActive ( mkey.CapsLock )
+
+2

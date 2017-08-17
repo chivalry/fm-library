@@ -1,0 +1,9 @@
+// text.CleanRetainStylesReturns ( _text )
+// Purpose:		Clear the formatting while retaining leading and trailing returns and the text style.
+// Parameters:		_text:	The text to clean.
+// Requirements: 	text.Clean
+// Version:		1.0 - Jim Feuerstein
+// Notes:			Copyright © 2017 Labor Street; https://opensource.org/licenses/MIT
+// Example:		sample = result
+
+text.Clean ( _text ; 0 ; 1 ; 1 ; 1 ; 1 ; 0 )

@@ -1,0 +1,36 @@
+// urlb.Param ( _name ; _value )
+// Purpose:		Adds a name/value pair to the URL query, where the query starts after the "?"
+// Parameters:		_name:	The name of the value
+//				_value:	The value assigned to the name
+// Requirements: 	urlb.Bookend
+//				text.StartsWith
+// Version:		1.0 - Todd Geist - 15-06-20
+// Notes:			http://www.modularfilemaker.org/module/urlbuilder/
+// Example:		sample = result
+
+Let (
+  [
+    _old_url	= $$_URLB_CURRENT_URL  ;
+    _is_fmp_url	= text.StartsWith ( _old_url ; "fmp://" ) ;
+
+    // If working with an FMP URL, if the name isn't script and doesn't already have a variable indicator,
+    // insert it.
+    _name = Case (
+      _is_fmp_url
+        and ( not text.StartsWith ( _name ; "$" ) )
+        and ( _name ≠ "param" )
+        and ( _name ≠ "script" )							; "$" & _name
+												; _name
+    );
+
+    _param  = GetAsURLEncoded ( _name ) &"=" & GetAsURLEncoded ( _value );
+
+    // If this is the first parameter, use the "?", otherwise use the "&".
+    _sep = Case (
+      PatternCount( _old_url; "?" )	; "&"
+						; "?"
+    )
+  ];
+
+  url.Bookend ( _old_url & _sep & _param )
+)

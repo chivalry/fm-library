@@ -1,0 +1,11 @@
+// modifier.KeyActive ( _key )
+// Purpose:		Returns true when passed the custom function constant for the specified key.
+// Parameters:		_key:		An integer from 1 to 5, can be encapsulated with appropriate custom
+//						functions.
+// Requirements:	mkey.BitIsSet
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		// When the shift and alt (or option) key is pressed...
+//				modifier.KeyActive ( modifier.Shift )
+//					and modifier.KeyActive ( modifier.Alt )
+
+modifier.BitIsSet ( Get ( ActiveModifierKeys ) ; _key )

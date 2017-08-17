@@ -1,0 +1,20 @@
+// let.ArrayGet ( _params ; _name ; _index )
+// Purpose:		Serves as syntactic sugar for retireving array values from Let notation. Returns a named
+//				value from a string of name/value pairs.
+// Parameters:		_params:	A string of name/value pairs in Let notation
+//				_name:	The name of the value to retrieve
+//				_index:	The index of a repeating variable
+// Requirements: 	let.Get
+//				let.IndexedName
+// Version:		1.0 written 13-07-27 by Jeremy Bante
+//				1.1 edited 15-11-26 by Charles Ross, improve readability, use letn.IndexedName
+// Example:		sample = result
+
+Let (
+  [
+    _indexed_name	= let._IndexedName ( _name ; _index );
+    _result			= let.Get ( _params ; _indexed_name )
+  ] ;
+
+  _result
+)

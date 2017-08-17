@@ -1,0 +1,34 @@
+// list.Concatenate ( _list_1; _list_2; _sep )
+// Purpose:		Takes two lists with the same number of items and returns a new list with the matching
+//				items in each of the lists concatenated with the separator between them.
+// Parameters:		_list_1:	The first list.
+//				_list_2:	The second list.
+//				_sep:		The character (or string) to separate matching entries with.
+// Requirements: 	lsts.First
+//				lsts.Rest
+// Version:		1.0 written 15-03-06 by Charles Ross
+// Notes:			The lists being the same length is *not* a requirement. Blanks will be inserted for the
+//				shorter list when there is a difference.
+// Example:		list.Concatenate ( "1¶2¶3"; "A¶B¶C"; "-" ) = "1-A¶2-B¶3-C"
+
+Case (
+  // Recursive exit condition
+  ( ValueCount ( _list_1 ) = 0 )
+    and ( ValueCount ( _list_2 ) = 0 );		dev.Nil;
+
+  Let(
+    [
+      _1_first = list.First ( _list_1 );
+      _2_first = list.First ( _list_2 );
+
+      _1_rest = list.Rest ( _list_1 );
+      _2_rest = list.Rest ( _list_2 );
+
+      _first = _1_first & _sep & _2_first;
+
+      _list = _first & ¶ & list.Concatenate ( _1_rest; _2_rest; _sep )
+    ];
+
+    _list
+  )
+)

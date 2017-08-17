@@ -1,0 +1,8 @@
+// let.First ( _params )
+// Purpose:		Returns the first name in the let notation defined in _params
+// Parameters:		_params:	The let notation parameters to get the name from
+// Requirements: 	let.GetNames
+// Version:		1.0 written 17-02-24 by Charles Ross
+// Example:		sample = result
+
+GetValue ( let.GetNames ( _params ) ; 1 )

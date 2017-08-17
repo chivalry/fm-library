@@ -1,0 +1,8 @@
+// sortable.Number ( _number )
+// Purpose:		Returns a textual version of a number that will sort property as text.
+// Parameters:		_number:	The number to convert.
+// Requirements:	padd.Zeros
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		sortable.Number ( 123.456 ) = "00000001234560000000"
+
+Right ( text.PadZeros ( _number * ( 10 ^ 10 ); 20 ); 20 )

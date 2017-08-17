@@ -1,0 +1,11 @@
+// text.EscapeDoubleQuotes ( _text )
+// Purpose:		Replace each individual double quote with a pair of double quotes.
+// Parameters:		_text:	The text to perform the replacement upon
+// Version:		1.0 - Jim Feuerstein
+// Notes:			This function is used in the creation of properly formatted csv files to
+//				convert any double-quote characters into a pair of double-quote characters.
+//				Copyright © 2017 Labor Street
+// Todo:			To dos
+// Example:		sample = result
+
+Substitute ( _text ; "\"" ; "\"\"" )

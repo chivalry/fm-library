@@ -1,0 +1,8 @@
+// path.TemporaryFilepath ( _filename )
+// Purpose:		Returns a platform-specific path to a filename in the temporary directory.
+// Parameters:		_filename:		The name of the file to calculate a path to.
+// Requirements: 	path.ProtocolFilePlatform
+// Version:		1.0 - Charles Ross - 15-06-01
+// Example:		sample = result
+
+path.ProtocolPlatform & Get ( TemporaryPath ) & _filename

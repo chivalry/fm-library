@@ -1,0 +1,7 @@
+// plat.IsWeb
+// Purpose:		Returns true if the system is running under on CWP or WebDirect.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		// While running the system on CWP or Webdirect...
+//				plat.IsWeb = 1
+
+platform.VersionName = platform.VersionWeb

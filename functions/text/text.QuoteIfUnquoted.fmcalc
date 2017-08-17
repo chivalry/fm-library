@@ -1,0 +1,11 @@
+// text.QuoteIfUnquoted
+// Purpose:		Returns the quoted string if it isn't already quoted.
+// Parameters:		_text:	The text to quote if needed.
+// Version:		1.0 - Charles Ross - 17-05-06
+// Example:		text.QuoteIfUnquoted ( "text" ) = "\"text\""
+//				  and text.QuoteIfUnquoted ( "\"text\"" ) = "\"text\""
+
+Case (
+  text.StartsWith ( _text ; "\"" ) and text.EndsWith ( _text ; "\"" )	; _text
+												; Quote ( _text )
+)

@@ -1,0 +1,21 @@
+// math.StDevP ( _list )
+// Purpose:		Returns the standard deviation given a list of population data
+// Parameters:		_list:	The list of population data
+// Requirements:	lsts.RemoveBlanks
+// Version:		1.0 written 15-09-12 by Charles Ross
+// Example:		Round ( math.StDevP ( List ( 5; 6; 7; 8 ) ) ; 2 ) = 1.12
+
+Let (
+  [
+    _params = Substitute ( list.RemoveBlanks ( _list ) ; "¶" ; " ; " ) ;
+    _calc = "StDevP ( " & _params & " )" ;
+    _stdevp = Evaluate ( _calc ) ;
+
+    _result = Case (
+      ValueCount ( _list ) = 0 ;	0 ;
+						_stdevp
+    )
+  ] ;
+
+  _result
+)

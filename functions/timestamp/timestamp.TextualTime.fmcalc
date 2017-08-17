@@ -1,0 +1,50 @@
+// timestamp.TextualTime ( _time )
+// Purpose:		Returns the time with words for units.
+// Parameters:		_time:	The time to format
+// Requirements: 	math.RoundTo
+// Version:		1.0 - Charles Ross - 17-03-08
+// Example:		timestamp.TextualTime ( Time ( 3 ; 4; 5 ) ; False ) = "3 hours, 4 minutes and 5 seconds"
+
+Let (
+  [
+    _time = GetAsTime ( Case (
+      _round_seconds	; math.RoundTo ( _time ; 60 )
+				; _time
+    ) ) ;
+
+    _hours		= Hour ( _time ) ;
+    _minutes	= Minute ( _time ) ;
+    _seconds	= Seconds ( _time ) ;
+
+    _hour_metric = Case (
+      _hours = 0	; dev.Nil ;
+      _hours = 1	; "1 hour"
+      			; _hours & " hours"
+    ) ;
+
+    _minute_metric = Case (
+      _minutes = 0	; dev.Nil ;
+      _minutes = 1	; "1 minute"
+				; _minutes & " minutes"
+    ) ;
+
+    _second_metric = Case (
+      _seconds = 0	; dev.Nil ;
+      _seconds = 1	; "1 second"
+				; _seconds & " seconds"
+    ) ;
+
+    _metrics = List ( _hour_metric ; _minute_metric ; _second_metric ) ;
+
+    _result = Choose ( ValueCount ( _metrics ) ;
+      "0 seconds" ;
+      _metrics ;
+      GetValue ( _metrics ; 1 ) & " and " & GetValue ( _metrics ; 2 ) ;
+      GetValue ( _metrics ; 1 ) & ", " & GetValue ( _metrics ; 2 ) & " and " & GetValue ( _metrics ; 3 )
+    ) ;
+
+    _ = ""
+  ] ;
+
+  _result
+)

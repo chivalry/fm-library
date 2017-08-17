@@ -1,0 +1,9 @@
+// plat.IsDesktop
+// Purpose:		Returns true if the system is running on a traditional computer.
+// Requirements: 	sysk.PlatformIsMac
+//				sysk.PlatformIsWin
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		// When the system is running on OS X or Windows...
+//				plat.IsDesktop = 1
+
+platform.IsMac or platform.IsWin

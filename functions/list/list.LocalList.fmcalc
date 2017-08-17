@@ -1,0 +1,24 @@
+// list.LocalList ( _field ; _start ; _end ; _exclude_empty )
+// Purpose:		A version of `List` that works with the local table to get a list of field values for
+//				the current found set.
+// Parameters:		_field_name:		The name of the field to retrieve values for
+//				_start:			The record number to start at
+//				_end:			The ending record number
+//				_exclude_empty:	Omit empty values from the list if True
+// Requirements: 	requirements
+// Version:		1.0 - Jim Feuerstein - 17-03-08
+// Notes:			Copyright © 2017 Labor Street
+// Example:		sample = result
+
+Case (
+  _start ≤ _end ;
+  Let (
+    [
+      _value = GetNthRecord ( _field_name ; _start )
+    ] ;
+    Case (
+      IsEmpty ( _value ) and _exclude_empty	; dev.Nil
+									; _value & "¶" & list.LocalList ( _field_name ; _start + 1 ; _end ; _exclude_empty )
+    )
+  )
+)

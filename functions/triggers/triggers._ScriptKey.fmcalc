@@ -1,0 +1,6 @@
+// triggers._ScriptKey
+// Purpose:		A convenience function that is used by both trig.Disable and trig.Enable.
+// Requirements: 	$_triggers_disabled_key
+// Version:		1.0 - Charles Ross - 15-06-20
+
+Char ( 9 ) & $_triggers_disabled_key & ¶

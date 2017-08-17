@@ -1,0 +1,24 @@
+// list.ValuePosition ( _item; _list )
+// Purpose:		Returns which occurrence in the list the given item is at. In other words,
+//				MiddleValues( TheList; ItemPosition( Item; TheList ); 1 ) = TheItem & "¶" (since
+//				MiddleValues appends a carriage return to the end of it's return value).
+// Parameters:		_list:			The list to search in
+//				_item:		The item to search for
+//				_start:		Which occurrence to begin looking at
+//				_occurrence:	Which occurrence to return
+// Version:		1.0 - Charles Ross 15-03-11
+// Example:		list.ValuePosition ( "4"; "1¶2¶3¶4¶5" ) = 4
+
+Case (
+  _start = 0 ;
+  0 ;
+
+  Let (
+    [
+      _bracketed_list	= "¶" & _list & "¶";
+      _search_position	= Position ( _bracketed_list; "¶" & _item & "¶"; 1; 1 )
+    ];
+
+    PatternCount ( Left ( _bracketed_list; _search_position ); "¶" )
+  )
+)

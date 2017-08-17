@@ -1,0 +1,14 @@
+// triggers.Restore
+// Purpose:		Restores triggers to their previous state after a force enable.
+// Version:		1.0 - Charles Ross - 17-04-27
+// Example:		sample = result
+
+Let (
+  [
+    $$_TRIGGERS_DISABLED_SCRIPTS = $$_TRIGGERS_SCRIPTS_STORE ;
+    $$_TRIGGERS_SCRIPTS_STORE = dev.Nil ;
+    $$_TRIGGERS_DISABLED = not IsEmpty ( $$_TRIGGERS_DISABLED_SCRIPTS )
+  ] ;
+
+  ""
+)

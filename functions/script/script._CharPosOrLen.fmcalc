@@ -1,0 +1,21 @@
+// script._CharPosOrLen ( _text ; _char ; _start )
+// Purpose:		Returns the position of the char in the text or the length of the text if char is absent.
+// Parameters:		_text:	The text to search within
+//				_char:	The character to look for
+//				_start:	Where to start looking
+// Version:		1.0 written 15-11-26 by Charles Ross
+// Example:		sample = result
+
+Let (
+  [
+    _length	= Length ( _text ) ;
+    _pos	= Position ( _text ; _char ; _start ; 1 ) ;
+
+    _result = Case (
+      _pos = 0	; _length
+			; _pos
+    )
+  ];
+
+  _result
+)

@@ -1,0 +1,9 @@
+// modifier.Shift
+// Purpose:		Returns the constant for the bit that is set when the shift key is pressed.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Notes:			To be used with modifier.KeyActive
+// Example:		// When the alt or shift key is pressed...
+//				modifier.Shift = 1
+//				  and modifier.KeyActive ( modifier.Shift )
+
+1

@@ -1,0 +1,6 @@
+// rgb.Green ( _rgb )
+// Purpose:		Returns the green value (0-255) of a given RGB value.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		rgb.Green ( RGB ( 1; 2; 3 ) ) = 2
+
+Int( ( _rgb - ( rgb.Red( _rgb ) * 65536 ) ) / 256 )

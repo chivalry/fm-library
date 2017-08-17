@@ -1,0 +1,69 @@
+// script._ReqParams ( _script )
+// Purpose:		Returns a list of required script parameters according to the script name and the
+//				FileMakerStandards.org convention for listing parameters in script names
+// Parameters:		_script:	The name of a script, optional, `Get ( ScriptName )` used when blank
+// Version:		1.0 written 12-12-07 by Jeremy Bante
+//				1.1 edited 13-06-29 by Jeremy Bante to append a trailing return to non-empty results
+//					to support direct concatenation with other lists
+// Notes:			http://filemakerstandards.org/display/cs/Script+naming
+//				Scripts should be named as follows:
+//				"Script Name ( Req1 ; Req2 {; Opt1 ; Opt2 } )"
+// Example:		scpm.RequiredParams ( "Script Name ( Req1 ; Req2 {; Opt1 } )" ) = List ( "Req1" ; "Req2" ) & ¶
+
+Case (
+  // ========================================
+  // Step 0, set-up
+  not $scpm.RequiredParams.step ;
+  Let (
+    [
+      _params = script._RawParams ( _script ; "required" ) ;
+
+      $scpm.RequiredParams.count = ValueCount ( _params ) ;
+
+      $scpm.RequiredParams.step = Case (
+        IsEmpty ( _params )	; 2
+					; 1
+      )
+    ];
+
+    script._ReqParams ( _params )
+  ) ;
+
+  // ========================================
+  // Step 1, trim whitespace
+  $scpm.RequiredParams.step = 1 ;
+  Let (
+    [
+      $scpm.RequiredParams.i = $scpm.RequiredParams.i + 1 ;
+      _param = Trim ( GetValue ( _script ; $scpm.RequiredParams.i ) ) ;
+      $scpm.RequiredParams.result = List ( $scpm.RequiredParams.result ; _param ) ;
+
+      $scpm.RequiredParams.step = Case (
+        $scpm.RequiredParams.i < $scpm.RequiredParams.count	; 1
+												; 2
+      )
+    ] ;
+
+    script._ReqParams ( _script )
+  ) ;
+
+  // ========================================
+  // Step 2, clean-up and return result
+  $scpm.RequiredParams.step = 2 ;
+  Let (
+    [
+      _result = Case (
+        not IsEmpty ( $scpm.RequiredParams.result ) ;
+        $scpm.RequiredParams.result & ¶
+      ) ;
+
+      // purge variables
+      $scpm.RequiredParams.i		= dev.Nil ;
+      $scpm.RequiredParams.count	= dev.Nil ;
+      $scpm.RequiredParams.result	= dev.Nil ;
+      $scpm.RequiredParams.step	= dev.Nil
+    ] ;
+
+    _result
+  )
+)

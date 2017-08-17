@@ -1,0 +1,44 @@
+// script._RawParams ( _script ; _type )
+// Purpose:		Abstracts out the common logic found in scpm.RequiredParams and scpm.OptionalParams
+// Parameters:		_script:	The name of the script
+//				_type:	The type of parameters, should be either "required" or "optional"
+// Version:		1.0 written 15-11-26 by Charles Ross
+// Example:		sample = result
+
+Let (
+  [
+    _start_char = Case (
+      _type = "required"	; "("
+					; "{"
+    ) ;
+
+    _end_opt_char = Case (
+      _type = "required"	; "{"
+					; "}"
+    ) ;
+
+    _end_req_char = ")" ;
+
+    _script = Case (
+      IsEmpty ( _script )	; Get ( ScriptName )
+					; _script
+    ) ;
+
+    _length	= Length ( _script ) ;
+    _start	= Position ( _script ; _start_char ; _length ; -1 ) + 1 ;
+
+    _end_opt = script._CharPosOrLen ( _script ; _end_opt_char ; _start ) ;
+    _end_req = script._CharPosOrLen ( _script ; _end_req_char ; _start ) ;
+
+    _end = Min ( _end_opt ; _end_req ) ;
+
+    _params = Case (
+      _start = 1	; dev.Nil
+			; Middle ( _script ; _start ; _end - _start )
+    ) ;
+
+    _result = Substitute ( _params ; ";" ; ¶ )
+  ] ;
+
+  _result
+)

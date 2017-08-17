@@ -1,0 +1,86 @@
+// let.GetNames ( _params )
+// Purpose:		Returns a list of names from the name/value pairs in Let notation.
+// Parameters:		_params:	Let notation string
+// Requirements: 	list.IsMember
+// Version:		1.0 written 13-01-24 by Daniel Smith
+//				1.1 edited 13-12-23 by John Jones to use Position/Middle
+//				1.2 edited 13-12-24 by Jeremy Bante to improve efficiency
+// Example:		let.GetNames ( let.Set ( "var1" ; "foo" ) & let.Set ( "var2" ; "bar" ) ) = List ( "var1" ; "var2" )
+
+Case (
+  // ========================================
+  // Step 0, set-up
+  not $_letn_GetNames_step ;
+  Let (
+    [
+      _empty = IsEmpty ( Trim ( _params ) ) ;
+
+      _params = Substitute (
+        ¶ & _params ;
+        [ "¶$"	; ¶	] ;		// remove "$" prefix
+        [ "¶$"	; ¶	] ;		// remove "$$" prefix
+        [ "¶¶"	; ¶	]		// remove empty values
+      ) ;
+
+      $_letn_GetNames_length = Length ( _params ) ;
+
+      $_letn_GetNames_step = Case ( 
+        _empty	; 2
+			; 1
+        )
+    ] ;
+
+    let.GetNames ( _params )
+  ) ;
+
+  // ========================================
+  // Step 1, check each parameter
+  $_letn_GetNames_step = 1 ;
+  Let (
+    [
+      _start				= $_letn_GetNames_end + 1 ;
+      $_letn_GetNames_end	= Position ( _params ; ¶ ; _start ; 1 ) ;
+      _end_of_list		= $_letn_GetNames_end = 0 ;
+
+      _length = Case (
+        _end_of_list	; $_letn_GetNames_length + 1
+				; $_letn_GetNames_end
+      ) - _start ;
+
+      _pair = Middle ( _params ; _start ; _length ) ;
+      _name = Left ( _pair ; Position ( _pair ; " = " ; 1 ; 1 ) - 1 ) ;
+
+      // only include _name if it isn't already in the result
+      _include = not list.IsMember ( _name ; $_letn_GetNames_result ) ;
+
+      $_letn_GetNames_result = List (
+        $_letn_GetNames_result ;
+        Case ( _include ; _name )
+      ) ;
+
+      _end_of_list = _end_of_list or ( $_letn_GetNames_end ≥ $_letn_GetNames_length ) ;
+
+      $_letn_GetNames_step = Case (
+        _end_of_list	; 2
+				; 1
+      )
+    ] ;
+
+    let.GetNames ( _params )
+  ) ;
+
+  // ========================================
+  // Step 2, clean-up and return result
+  $_letn_GetNames_step = 2 ;
+  Let (
+    [
+      _result = $_letn_GetNames_result ;
+
+      // purge variables
+      _var_list = List ( "$_letn_GetNames_end" ; "$_letn_GetNames_length" ; "$_letn_GetNames_result"; "$_letn_GetNames_step" ) ;
+      _ = dev.ClearVars ( _var_list )
+    ] ;
+
+    _result
+  )
+)

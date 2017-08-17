@@ -1,0 +1,2 @@
+// Functions dealing with the range data structure, which is an item a separator and another item greater
+// than or equal to the first.

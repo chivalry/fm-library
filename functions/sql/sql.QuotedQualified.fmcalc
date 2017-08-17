@@ -1,0 +1,9 @@
+// sql.QuotedQualified ( _field )
+// Purpose:		Returns a quoted, fully qualified field reference, `"Table"."field"`
+// Parameters:		_field:	The field to return in quoted qualified format
+// Requirements: 	sql.QuotedTableName
+//				sql.QuotedFieldName
+// Version:		1.0 - Charles Ross - 17-03-13
+// Example:		sample = result
+
+sql.QuotedTableName ( _field ) & "." & sql.QuotedFieldName ( _field )

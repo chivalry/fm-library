@@ -1,0 +1,10 @@
+// plat.IsiPhone
+// Purpose:		Returns true if the system is running under on an iPhone or iPod Touch.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Notes:			Makes use of global variables $$_PLAT_OVERRIDE_IPHONE and to allow the
+//				developer to override the return value during development and testing.
+// Example:		// While running the system on an iPhone or iPod Touch...
+//				sysk.PlatformIsiPhone = 1
+
+( platform.VersionName = platform.VersioniPhone )
+  or $$_PLATFORM_OVERRIDE_IPHONE

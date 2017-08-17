@@ -1,0 +1,8 @@
+// text.EndsWith ( _text; _search_string )
+// Purpose:		Returns True if the text ends with the search string.
+// Parameters:		_text:		The text to test.
+//				_search_string:	The search string to test the presence of at the end of text.
+// Version:		1.0 - Charles Ross - 17-03-08
+// Example:		( not text.StartsWith ( "Four score"; "Four" ) ) and text.StartsWith ( "Seven years"; "years" )
+
+Right ( _text;  Length ( _search_string ) ) = _search_string

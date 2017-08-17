@@ -1,0 +1,7 @@
+// system.RecordStateNewOpen
+// Purpose:		Returns the constant value indicating modified record is uncommitted
+// Version:		1.0 - Charles Ross - 17-03-20
+// Example:		// The current record is new and is uncommited…
+//				Get ( RecordOpenState ) = system.RecordStateNewOpen
+
+1

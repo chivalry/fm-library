@@ -1,0 +1,87 @@
+// xmlp.ExtractData ( _xml ; _tag ; _idx )
+//
+// Purpose:		Returns the contents of the instanceth attribute of the xml.
+//
+// Parameters:		_xml:	The XML data to parse
+//				_tag:		The tag to get the data from
+//				_idx:		Which instance of the tag to get.
+//
+// Requirements: 	requirements
+//
+// Version:		1.0 written 08-04-29 by Andy Knasinski
+//
+// Notes:			https://www.briandunning.com/cf/1
+//
+// Todo:			Debug edit in comments below that was made by Daniel A. Shockley which is supposed
+//				to be able to handle tags with attributes (i.e., <InvNum attrb="value">123</InvNum>).
+//
+// Example:
+// Let (
+//   [
+//     _xml = List (
+//       "<xml>" ;
+//       "  <InvNum>123</InvNum>" ;
+//       "  <InvNum>456</InvNum>" ;
+//       "  <InvNum>789</InvNum>" ;
+//       "</xml>"
+//     )
+//   ] ;
+// 
+//   xmlp.ExtractData ( _xml ; "InvNum" ; 2 )
+// ) = 456
+
+
+// https://www.briandunning.com/cf/1
+
+Let (
+  [
+    _xml_len = Length ( _xml ) ; 
+    _tag_len = Length ( _tag ) ; 
+    _idx = If ( IsEmpty ( _idx ) ; 1 ; _idx ) ;
+
+    _open = "<" & _tag & ">" ;
+    _close = "</" & _tag & ">" ;
+
+    _open_pos = Position ( _xml ; _open ; 1 ; _idx ) ;
+    _close_pos = Position ( _xml ; _close ; 1 ; _idx ) ;
+
+    _start = _open_pos + _tag_len + 2 ;
+    _len = _xml_len - ( _xml_len - _close_pos ) - ( _open_pos + _tag_len + 2 )
+  ] ;
+
+  Case(
+    IsEmpty ( _xml )
+      or IsEmpty ( _tag )
+      or ( PatternCount ( _xml ; _open ) = 0 ) ;
+    dev.Nil ;
+
+    Middle ( _xml ; _start ; _len )
+  )
+)
+
+/* //version 1.1, Daniel A. Shockley
+Let ( [ 
+XML_Length = Length ( _xml ) 
+; Attribute_Length = Length ( _attribute ) 
+; Get_Instance = If ( IsEmpty ( _instance ) ; 1 ; _instance ) 
+; posOpenTagStart = Position ( _xml ; "<" & _attribute; 1; Get_Instance ) 
+; posNextOpen = Position ( _xml ; "<"; posOpenTagStart + 1; 1 ) 
+; posOpenTagFinish = Position ( _xml ; ">"; posOpenTagStart; 1 ) 
+; posCloseTagStart = Position( _xml; "</" & _attribute & ">"; posOpenTagFinish; 1 )
+]; 
+
+
+Case(
+IsEmpty ( _xml ) or IsEmpty ( _attribute ) 
+or ( posOpenTagStart = 0 ) // Attribute not in XML at all
+or ( posNextOpen>0 and posOpenTagFinish> posNextOpen ) // Attribute seems to start, but another tag starts before opening tag brackets close
+; "" 
+;
+Middle ( 
+_xml 
+; posOpenTagFinish + 1 
+; posCloseTagStart - posOpenTagFinish - 1
+)
+) 
+
+)*/

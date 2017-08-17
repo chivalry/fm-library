@@ -1,0 +1,20 @@
+// triggers.Reset
+// Purpose:		Forces any existing trigger suppression to be halted regardless of calling script
+//				trigger suppression state.
+// Requirements: 	$$_TRIGGERS_DISABLED
+//				$$_TRIGGERS_DISABLED_SCRIPTS
+//				$_triggers_disabled_key
+// Version:		1.0 - Jeremy Bante - 13-04-08
+// Notes:			https://github.com/jbante/FileMaker-Techniques/blob/master/CustomFunctions/Triggers/TriggersAreActive.fmfn
+//				http://filemakerstandards.org/display/bp/Suppressible+Triggered+Scripts
+//				This may be useful to recover from a situation where a script forgot to call
+//				TriggersEnable at the end of operation. In order to be suppressed, a script called
+//				via trigger should use the TriggersAreActive function to decide whether or not to run.
+// Example:		// Completely halts the suppression of triggers…
+//				trig.Reset
+
+dev.ClearVars ( List (
+  "$$_TRIGGERS_DISABLED_SCRIPTS" ;
+  "$$_TRIGGERS_DISABLED" ;
+  "$_triggers_disabled_key"
+) )

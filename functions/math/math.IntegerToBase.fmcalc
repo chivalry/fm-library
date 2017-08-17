@@ -1,0 +1,28 @@
+// math.IntegerToBase ( _int_text; _base )
+// Purpose:		Converts an integer into a textual represention of the number in the given base.
+// Parameters:		_int_text:	A textual representation of the integer in the tiven base
+//				_base:	The base to convert from.
+// Requirements: 	dev.Nil
+// Version:		1.0 written 05-10-01 by Mikhail Edoshin
+// Notes:			http://web.archive.org/web/20100117170354/
+//				  http://edoshin.skeletonkey.com/2005/10/number_to_base.html
+// Example:		math.IntegerToBase ( 287 ; 16 ) = "11F"
+
+Case(
+  IsEmpty ( _int )
+    or ( _base < 2 )
+    or ( _base > 36 )
+    or ( Int ( _int ) ≠ _int ) ;		dev.Nil ;
+
+  Let(
+    [
+      _chars = data.Digits & data.Alphabet ;
+
+      _current_digit = Middle ( _chars ; Mod ( _int ; _base ) + 1 ; 1 )
+    ];
+    
+    Case(
+      _int ≥ _base;	math.IntegerToBase( Div ( _int ; _base ) ; _base )
+    )  & _current_digit
+  )
+)

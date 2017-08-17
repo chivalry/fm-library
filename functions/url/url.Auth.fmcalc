@@ -1,0 +1,45 @@
+// url.Auth ( _user ; _password )
+// Purpose:		Adds a user's name and password to a URL, replaces one if it already exists.
+// Parameters:		_user:		The user's account name
+//				_password:	The password string
+// Requirements: 	url.Bookend
+//				url.ProtocolEnd
+//				dev.Nil
+// Version:		1.0 - Todd Geist - 15-06-20
+// Notes:			The authorization string comes after the protocol but before the "@" symbol.
+//				http://www.modularfilemaker.org/module/urlbuilder/
+// Example:		sample = result
+
+Let (
+  [
+    _auth_end = "@" ;
+
+    _new_url = $$_URLB_CURRENT_URL ;
+
+    // Clear out any existing authorization.
+    _pos_1		= Position ( _new_url ; "://" ; 1; 1 ) + Length ( "://" ) ;
+    _pos_2		= Position ( _new_url ; _auth_end ; _pos_1 ; 1 ) + Length ( _auth_end ) ;
+    _size		= _pos_2 - _pos_1 ;
+    _old_auth	= Middle ( _new_url ; _pos_1 ; _size );
+
+    _new_url = Case (
+      IsEmpty ( _old_auth ) ;		_new_url ;
+						Substitute ( _new_url ; _old_auth ; dev.Nil )
+    ) ;
+
+    // Calculate and insert the new authorization
+    _new_auth = Case (
+      IsEmpty ( _user & _password ) ;	dev.Nil ;
+							_user & ":" & _password & _auth_end
+    ) ;
+
+    _new_url = Substitute(
+      _new_url	; "://"
+      			; "://" & _new_auth
+    )
+
+  ];
+
+  // This will assign the updated URL to the global variable.
+  url.Bookend ( _new_url )
+)

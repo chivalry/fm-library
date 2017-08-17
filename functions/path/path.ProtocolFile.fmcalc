@@ -1,0 +1,6 @@
+// path.ProtocolFile
+// Purpose:		Returns the constant string that represents the protocol for file paths.
+// Version:		1.0 - Charles Ross - 15-06-12
+// Example:		path.ProtocolFile = "file:"
+
+"file:"

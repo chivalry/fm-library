@@ -1,0 +1,8 @@
+// text.PadZeros ( _text; _length )
+// Purpose:		Pads zeroes to the limit that the returned text is of the length specified.
+// Parameters:		_text:	The text to pad
+//				_length:	How long the return string should be.
+// Version:		1.0 - Charles Ross - 15-03-11
+// Example:		text.PadZeros ( 13; 5 ) = "00013"
+
+Right( text.Pad( _text; "0"; _length; "left" ); _length )
